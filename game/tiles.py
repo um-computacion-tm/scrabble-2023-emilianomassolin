@@ -8,7 +8,7 @@ class Tile:
 
 class BagTiles:
     def __init__(self):
-     self.tiles = [Tile('BLANCO', 2) for _ in range(1)]
+     self.tiles = [Tile('BLANCO', 0) for _ in range(2)]
      self.tiles.extend ( [Tile('A', 1) for _ in range(12)])
      self.tiles.extend ( [Tile('E', 1) for _ in range(12)])
      self.tiles.extend ( [Tile('O', 1) for _ in range(9)])
@@ -39,7 +39,7 @@ class BagTiles:
      self.tiles.extend ( [Tile('Z', 10) for _ in range(1)])
      random.shuffle(self.tiles)
 
-     def take(self, count):
+    def take(self, count):
         tiles = []
         for _ in range(count):
             tiles.append(self.tiles.pop())
@@ -47,5 +47,5 @@ class BagTiles:
 
 
 
-     def put(self, tiles):
+    def put(self, tiles):
         self.tiles.extend(tiles)

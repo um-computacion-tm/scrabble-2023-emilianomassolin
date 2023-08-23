@@ -1,8 +1,7 @@
 
 import unittest
 from game.tiles import (
-    BagTiles,
-    Tile,
+    BagTiles,Tile
 )
 from unittest.mock import patch
 
@@ -21,7 +20,7 @@ class TestBagTiles(unittest.TestCase):
         bag = BagTiles()
         self.assertEqual(
             len(bag.tiles),
-            99,
+            100,
         )
         self.assertEqual(
             patch_shuffle.call_count,
@@ -38,7 +37,7 @@ class TestBagTiles(unittest.TestCase):
         tiles = bag.take(2)
         self.assertEqual(
             len(bag.tiles),
-            3,
+            98,
         )
         self.assertEqual(
             len(tiles),
@@ -47,11 +46,11 @@ class TestBagTiles(unittest.TestCase):
 
     def test_put(self):
         bag = BagTiles()
-        put_tiles = [Tile('Z', 1), Tile('Y', 1)]
+        put_tiles = [Tile('Z', 10), Tile('Y', 4)]
         bag.put(put_tiles)
         self.assertEqual(
             len(bag.tiles),
-            7,
+            102,
         )
 
 
