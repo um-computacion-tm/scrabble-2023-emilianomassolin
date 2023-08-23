@@ -9,8 +9,5 @@ class Board:
         for row in self.board:
             print(' '.join(row))
 
-# Crear un tablero de juego de Scrabble de 15x15
 scrabble_board = Board(15, 15)
-
-# Mostrar el tablero
 scrabble_board.display()
