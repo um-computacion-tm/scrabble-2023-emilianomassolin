@@ -5,7 +5,7 @@ from game.tiles import Tile
 
 class TestCell(unittest.TestCase):
     def test_init(self):
-        cell = Cell(None,None,multiplier=2, multiplier_type='letter')
+        cell = Cell(None,True,multiplier=2, multiplier_type='letter')
 
         self.assertEqual(
             cell.multiplier,
@@ -22,14 +22,14 @@ class TestCell(unittest.TestCase):
         )
 
     def test_add_letter(self):
-        cell = Cell(None,None,multiplier=1, multiplier_type='')
+        cell = Cell(None,True,multiplier=1, multiplier_type='')
         letter = Tile(letter='p', value=3)
 
         cell.add_letter(letter=letter)
 
         self.assertEqual(cell.letter, letter)
     def test_cell_value(self):
-        cell = Cell(None,None,multiplier=2, multiplier_type='letter')
+        cell = Cell(None,True,multiplier=2, multiplier_type='letter')
         letter = Tile(letter='p', value=3)
         cell.add_letter(letter=letter)
 
@@ -39,7 +39,7 @@ class TestCell(unittest.TestCase):
         )
 
     def test_cell_multiplier_word(self):
-        cell = Cell(None,None,multiplier=2, multiplier_type='word')
+        cell = Cell(None,True,multiplier=2, multiplier_type='word')
         letter = Tile(letter='p', value=3)
         cell.add_letter(letter=letter)
 
