@@ -10,4 +10,6 @@ Add the word and letter multiplier tests.
 2023-09-06
 modify the cell class, add a " calculate_word " class inside the cell folder, put a function to calculate the value of the word inside the calculate_word class and add the code climate.
 2023-09-07
-fixing git ignore issues
+fixing git ignore issues,add new features to the scrable folder, the function of turns with their respective tests.
+2023-09-12
+We create the function validate_word_inside_board to know the location of the word on the board.
