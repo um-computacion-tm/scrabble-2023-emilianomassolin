@@ -1,4 +1,5 @@
 from game.cell import Cell
+from game.tiles import *
 
 class Board:
     def __init__(self):
@@ -25,3 +26,9 @@ class Board:
             return True
         else:
             return False
+    def empty(self):
+        if self.grid[7][7].letter == None:
+            self.is_empty = True
+        else:
+            self.is_empty = False
+            
