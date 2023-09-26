@@ -14,4 +14,4 @@ fixing git ignore issues,add new features to the scrable folder, the function of
 2023-09-12
 We create the function validate_word_inside_board to know the location of the word on the board.
 2023-09-26
-docker configuration
+docker configuration and creating the main
