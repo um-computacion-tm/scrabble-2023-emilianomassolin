@@ -1,3 +1,5 @@
+2023-09-27
+create function has_letters
 2023-09-26
 docker configuration ,create the main,create function empty board,readme change, create function validate_word_place_board
 2023-09-12
