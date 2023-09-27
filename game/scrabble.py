@@ -20,3 +20,4 @@ class ScrabbleGame:
                 self.current_player = self.players[index]
             else:
                 self.current_player = self.players[0]
+  
