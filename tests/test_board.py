@@ -14,6 +14,17 @@ class TestBoard(unittest.TestCase):
             len(board.grid[0]),
             15,
         )
+    def test_board_cell_00(self):
+        board = Board()
+        cell = board.grid
+        self.assertEqual(cell[0][0].multiplier,3 )
+        self.assertEqual(cell[0][0].multiplier_type,'word' )
+    def test_board_cell_33(self):
+        board=Board()
+        cell=board.grid
+        self.assertEqual(cell[3][3].multiplier,2)
+        self.assertEqual(cell[3][3].multiplier_type,'word')
+            
     def test_word_inside_board(self):
          board= Board()
          word = "Facultad"

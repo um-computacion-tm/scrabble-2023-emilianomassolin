@@ -1,5 +1,6 @@
 from game.tiles import Tile
 
+
 class Cell:
     def __init__(self,letter,state,multiplier, multiplier_type):
         self.multiplier = multiplier

@@ -6,6 +6,7 @@ from game.player import *
 
 
 
+
 def main():
     while True:
         try: 
