@@ -1,6 +1,38 @@
 import random
 
+TILES = [
+    {"letter": "A", "value": 1, "quantity": 12},
+    {"letter": "B", "value": 3, "quantity": 2},
+    {"letter": "C", "value": 3, "quantity": 4},
+    {"letter": "CH", "value": 5, "quantity": 1},
+    {"letter": "D", "value": 2, "quantity": 5},
+    {"letter": "E", "value": 1, "quantity": 12},
+    {"letter": "F", "value": 4, "quantity": 1},
+    {"letter": "G", "value": 2, "quantity": 2},
+    {"letter": "H", "value": 4, "quantity": 2},
+    {"letter": "I", "value": 1, "quantity": 6},
+    {"letter": "J", "value": 8, "quantity": 1},
+    {"letter": "L", "value": 1, "quantity": 4},
+    {"letter": "LL", "value": 8, "quantity": 1},
+    {"letter": "M", "value": 3, "quantity": 2},
+    {"letter": "N", "value": 1, "quantity": 5},
+    {"letter": "Ñ", "value": 8, "quantity": 1},
+    {"letter": "O", "value": 1, "quantity": 9},
+    {"letter": "P", "value": 3, "quantity": 2},
+    {"letter": "Q", "value": 5, "quantity": 1},
+    {"letter": "R", "value": 1, "quantity": 5},
+    {"letter": "RR", "value": 8, "quantity": 1},
+    {"letter": "S", "value": 1, "quantity": 6},
+    {"letter": "T", "value": 1, "quantity": 4},
+    {"letter": "U", "value": 1, "quantity": 5},
+    {"letter": "V", "value": 4, "quantity": 1},
+    {"letter": "X", "value": 8, "quantity": 1},
+    {"letter": "Y", "value": 4, "quantity": 1},
+    {"letter": "Z", "value": 10, "quantity": 1},
+    {"letter": "_", "value": 0, "quantity": 2}  
+]
 class Tile:
+      
     def __init__(self, letter, value):
         self.letter = letter
         self.value = value
@@ -8,22 +40,14 @@ class Tile:
 
 class BagTiles:
     def __init__(self):
-     self.tiles = [Tile('BLANCO', 0) for _ in range(2)];self.tiles.extend ( [Tile('A', 1) for _ in range(12)])
-     self.tiles.extend ( [Tile('E', 1) for _ in range(12)]);self.tiles.extend ( [Tile('O', 1) for _ in range(9)])
-     self.tiles.extend ( [Tile('I', 1) for _ in range(6)]);self.tiles.extend ( [Tile('S', 1) for _ in range(6)])
-     self.tiles.extend ( [Tile('N', 1) for _ in range(5)]);self.tiles.extend ( [Tile('L', 1) for _ in range(4)])
-     self.tiles.extend ( [Tile('R', 1) for _ in range(5)]);self.tiles.extend ( [Tile('U', 1) for _ in range(5)])
-     self.tiles.extend ( [Tile('T', 1) for _ in range(4)]);self.tiles.extend ( [Tile('D', 2) for _ in range(5)])
-     self.tiles.extend ( [Tile('G', 2) for _ in range(2)]);self.tiles.extend ( [Tile('C', 3) for _ in range(4)])
-     self.tiles.extend ( [Tile('B', 3) for _ in range(2)]);self.tiles.extend ( [Tile('M', 3) for _ in range(2)])
-     self.tiles.extend ( [Tile('P', 3) for _ in range(2)]);self.tiles.extend ( [Tile('H', 4) for _ in range(2)])
-     self.tiles.extend ( [Tile('F', 4) for _ in range(1)]);self.tiles.extend ( [Tile('V', 4) for _ in range(1)])
-     self.tiles.extend ( [Tile('Y', 4) for _ in range(1)]);self.tiles.extend ( [Tile('CH', 5) for _ in range(1)])
-     self.tiles.extend ( [Tile('Q', 5) for _ in range(1)]);self.tiles.extend ( [Tile('J', 8) for _ in range(1)])
-     self.tiles.extend ( [Tile('LL', 8) for _ in range(1)]);self.tiles.extend ( [Tile('Ñ', 8) for _ in range(1)])
-     self.tiles.extend ( [Tile('RR', 8) for _ in range(1)]);self.tiles.extend ( [Tile('X', 8) for _ in range(1)])
-     self.tiles.extend ( [Tile('Z', 10) for _ in range(1)])
-     random.shuffle(self.tiles)
+        self.tiles = []
+        for i in TILES:
+            for j in range(i.get('quantity')):
+                self.tiles.append(Tile(i.get("letter"),i.get("value")))
+        random.shuffle(self.tiles)
+     
+
+
 
     def take(self, count):
         tiles = []
