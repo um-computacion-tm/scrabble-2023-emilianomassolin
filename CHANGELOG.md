@@ -1,3 +1,6 @@
+2023-09-29
+create function increase_score with test , fix some features to improve maintainability and change init player
+
 2023-09-28
 create function add bonus with test.
 2023-09-27

@@ -8,8 +8,17 @@ class TestPlayer(unittest.TestCase):
         player_1 = Player()
         self.assertEqual(
             len(player_1.tiles),
-            0,
+            0,   
         )
+        self.assertEqual(player_1.score,0)
+    def test_increase_score(self):
+        player_1=Player()
+        player_1.increse_score(2)
+        self.assertEqual(player_1.score,2)
+            
+        
+        
+        
     def test_validate_user_has_letters(self):
         bag_tile = BagTiles()
         bag_tile.tiles = [
