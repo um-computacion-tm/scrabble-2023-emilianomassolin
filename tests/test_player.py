@@ -15,7 +15,12 @@ class TestPlayer(unittest.TestCase):
         player_1=Player()
         player_1.increse_score(2)
         self.assertEqual(player_1.score,2)
-            
+    
+    def test_take_tiles_from_the_bag(self):
+        Player1=Player()
+        bag=BagTiles()
+        Player1.take_tiles_from_the_bagtiles(bag,2)
+        self.assertEqual(len(Player1.tiles),2)        
         
         
         

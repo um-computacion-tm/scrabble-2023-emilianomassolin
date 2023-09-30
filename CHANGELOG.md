@@ -1,3 +1,5 @@
+2023-09-30
+create function take_tiles_from_the_bag.
 2023-09-29
 create function increase_score with test , fix some features to improve maintainability and change init player
 
