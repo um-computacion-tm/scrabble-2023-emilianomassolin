@@ -11,7 +11,14 @@ class Player:
         self.score+=amount
     def take_tiles_from_the_bagtiles(self,bag:BagTiles,amount):
         self.tiles.extend(bag.take(amount)) 
-           
+    def exchange_tile(self, tile, bag:BagTiles):
+        for i in range(len(self.tiles)):
+            if self.tiles[i] == tile:
+                popped = self.tiles.pop(i)
+                bag.put([popped])
+                break
+
+        self.tiles.extend(bag.take(1))      
         
     def has_letters(self, tiles1):
         comparacion=len(tiles1)

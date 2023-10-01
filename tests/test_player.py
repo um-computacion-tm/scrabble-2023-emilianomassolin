@@ -21,7 +21,13 @@ class TestPlayer(unittest.TestCase):
         bag=BagTiles()
         Player1.take_tiles_from_the_bagtiles(bag,2)
         self.assertEqual(len(Player1.tiles),2)        
-        
+    def test_player_exchange(self):
+        player = Player()
+        bag = BagTiles()
+        player.take_tiles_from_the_bagtiles(bag, 2)
+        tile = player.tiles[0]
+        player.exchange_tile(player.tiles[0], bag)
+        self.assertFalse(tile == player.tiles[0])    
         
         
     def test_validate_user_has_letters(self):
