@@ -11,7 +11,12 @@ class TestTiles(unittest.TestCase):
         tile = Tile('A',1)
         self.assertEqual(tile.letter, 'A')
         self.assertEqual(tile.value, 1)
-        
+    def test_get_tile(self):
+        tile = Tile('A', 1)
+        self.assertEqual(tile.letter, tile.get_letter()) 
+    def test_get_value(self):
+        tile=Tile('B',3)
+        self.assertEqual(tile.value,tile.get_value())   
 
 
 class TestBagTiles(unittest.TestCase):

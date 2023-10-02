@@ -36,7 +36,10 @@ class Tile:
     def __init__(self, letter, value):
         self.letter = letter
         self.value = value
-
+    def get_letter(self):
+        return self.letter
+    def get_value(self):
+        return self.value
 
 class BagTiles:
     def __init__(self):
@@ -46,16 +49,11 @@ class BagTiles:
                 self.tiles.append(Tile(i.get("letter"),i.get("value")))
         random.shuffle(self.tiles)
      
-
-
-
     def take(self, count):
         tiles = []
         for _ in range(count):
             tiles.append(self.tiles.pop())
         return tiles
-
-
 
     def put(self, tiles):
         self.tiles.extend(tiles)
