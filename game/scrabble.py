@@ -1,12 +1,15 @@
 from game.board import Board
-from game.player import Player
+from game.player import *
 from game.tiles import BagTiles
+from game.dictionary import*
 
 class ScrabbleGame:
     def __init__(self, players_count: int):
         self.board = Board()
         self.bag_tiles = BagTiles()
         self.players:list[Player] = []
+        self.dictionary = Dictionary('dictionaries/dictionary.txt')
+        
         for _ in range(players_count):
             self.players.append(Player())
         
@@ -20,7 +23,11 @@ class ScrabbleGame:
                 self.current_player = self.players[index]
             else:
                 self.current_player = self.players[0]
-    #def validate_word(self, word, location, orientation):
+    #def validate_word(self, word):
+    #    word = word.lower()
+    #    return(self.dictionary.has_word(word))
+        
+            
     #    '''
     #    1- Validar que usuario tiene esas letras
     #    2- Validar que la palabra entra en el tablero

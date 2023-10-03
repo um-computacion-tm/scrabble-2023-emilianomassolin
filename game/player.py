@@ -30,7 +30,12 @@ class Player:
         if comparacion==0:
             return True
         else:
-            return False   
+            return False 
+    def find_letter_in_tiles(self, letter):
+        for tile in self.tiles:
+            if tile.get_letter() == letter.upper():
+                return tile.get_letter()
+        return None  
    
         
      

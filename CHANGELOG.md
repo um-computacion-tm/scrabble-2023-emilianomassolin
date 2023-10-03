@@ -1,3 +1,5 @@
+2023-10-03
+create function find_letter_in_tiles
 2023-10-02
 add function get_letter and get_Value in class tile,change main and add dictionary
 2023-10-01

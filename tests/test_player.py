@@ -76,8 +76,16 @@ class TestPlayer(unittest.TestCase):
 
            is_valid = player1.has_letters(tiles)
            self.assertEqual(is_valid, False)
-
-            
+    def test_find_letter_in_tiles(self):
+        player = Player()
+        player.tiles = [Tile('A', 1), Tile('B', 3), Tile('C', 1)]
+        letra = player.find_letter_in_tiles('B')
+        self.assertEqual(letra,"B")
+    def test_not_find_letter_in_tiles(self):
+        player=Player()
+        player.tiles=[Tile('A', 1), Tile('B', 3), Tile('C', 1)] 
+        resultado=player.find_letter_in_tiles("x")
+        self.assertEqual(resultado,None)    
             
 if __name__ == '__main__':
     unittest.main()

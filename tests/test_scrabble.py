@@ -1,6 +1,8 @@
 import unittest
 from game.scrabble import ScrabbleGame
-
+from game.tiles import *
+from game.player import*
+from game.dictionary import*
 class TestScrabbleGame(unittest.TestCase):
     def test_init(self):
         scrabble_game = ScrabbleGame(3)
@@ -31,8 +33,10 @@ class TestScrabbleGame(unittest.TestCase):
         scrabble_game.next_turn()
  
         assert scrabble_game.current_player == scrabble_game.players[0]
-        
-        
+   # def test_validate_word(self):
+   #    
+   #    game=ScrabbleGame(3)
+   #    self.assertTrue(game.validate_word("auto"))
 
 if __name__ == '__main__':
     unittest.main()
