@@ -23,9 +23,9 @@ class ScrabbleGame:
                 self.current_player = self.players[index]
             else:
                 self.current_player = self.players[0]
-    #def validate_word(self, word):
-    #    word = word.lower()
-    #    return(self.dictionary.has_word(word))
+    def validate_word(self, word):
+        word = word.lower()
+        return(self.dictionary.has_word(word))
         
             
     #    '''

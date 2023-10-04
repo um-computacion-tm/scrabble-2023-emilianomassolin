@@ -33,10 +33,10 @@ class TestScrabbleGame(unittest.TestCase):
         scrabble_game.next_turn()
  
         assert scrabble_game.current_player == scrabble_game.players[0]
-   # def test_validate_word(self):
-   #    
-   #    game=ScrabbleGame(3)
-   #    self.assertTrue(game.validate_word("auto"))
+    def test_validate_word(self):
+       
+       game=ScrabbleGame(3)
+       self.assertTrue(game.validate_word("auto"))
 
 if __name__ == '__main__':
     unittest.main()

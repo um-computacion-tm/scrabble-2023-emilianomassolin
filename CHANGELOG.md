@@ -1,3 +1,5 @@
+2023-10-04
+create function validate_word
 2023-10-03
 create function find_letter_in_tiles
 2023-10-02
