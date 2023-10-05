@@ -1,4 +1,4 @@
-from game.board import Board
+from game.board import *
 from game.player import *
 from game.tiles import BagTiles
 from game.dictionary import*
@@ -9,10 +9,8 @@ class ScrabbleGame:
         self.bag_tiles = BagTiles()
         self.players:list[Player] = []
         self.dictionary = Dictionary('dictionaries/dictionary.txt')
-        
         for _ in range(players_count):
             self.players.append(Player())
-        
         self.current_player = None
     def next_turn(self):
         if self.current_player is None:
@@ -23,12 +21,11 @@ class ScrabbleGame:
                 self.current_player = self.players[index]
             else:
                 self.current_player = self.players[0]
-    def validate_word(self, word):
+    def validate_dictionary_word(self, word):
         word = word.lower()
         return(self.dictionary.has_word(word))
         
-            
-    #    '''
+
     #    1- Validar que usuario tiene esas letras
     #    2- Validar que la palabra entra en el tablero
     #    '''

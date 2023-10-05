@@ -1,6 +1,7 @@
 import unittest
 from game.board import Board
 from game.tiles import *
+from game.cell import Cell
 
 
 class TestBoard(unittest.TestCase):
@@ -45,13 +46,13 @@ class TestBoard(unittest.TestCase):
 
         assert word_is_valid == False
     def test_word_inside_board_vertical(self):
-      board = Board()
-      word = "FACULTAD"
-      location = (5, 4)
-      orientation = "V"
-      word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        board = Board()
+        word = "FACULTAD"
+        location = (5, 4)
+        orientation = "V"
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
       
-      assert word_is_valid == True
+        assert word_is_valid == True
     def test_board_is_empty(self):
         board = Board()
         board.empty()
@@ -140,5 +141,20 @@ class TestBoard(unittest.TestCase):
         orientation = "V"
         word_is_valid = board.validate_word_place_board(word, location, orientation)
         assert word_is_valid == False  
+    #def test_put_word_Horizontal():
+    #    board=Board()
+    #    location=(4,6)
+    #    orientation="H"
+    #    word=[Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None),
+    #          Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None),
+    #          Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
+    #          Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
+    #          ]
+    #    
+    #    board.put_word(word,location,orientation)
+    #    self.assertEqual(board.grid(location),word[0].letter) 
+        
+        
+        
 if __name__ == '__main__':
     unittest.main()

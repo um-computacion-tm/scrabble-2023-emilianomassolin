@@ -5,6 +5,11 @@ class Player:
         self.name=""
         self.score=0
         self.tiles = []
+    def get_score(self):
+        return self.score
+    def get_tiles(self):
+        return self.tiles
+        
         
     def increse_score(self,amount):
         self.amount=amount
@@ -21,21 +26,22 @@ class Player:
                 break
         self.tiles.extend(bag.take(1))      
     
-    def has_letters(self, tiles1):
-        comparacion=len(tiles1)
-        for i in tiles1:
-            for j in self.tiles:
-                if i.letter == j.letter:
-                 comparacion -=1
-        if comparacion==0:
-            return True
-        else:
-            return False 
     def find_letter_in_tiles(self, letter):
         for tile in self.tiles:
             if tile.get_letter() == letter.upper():
                 return tile.get_letter()
         return None  
+   
+    def give_requested_tiles(self, word):
+        letters = []
+        for letter in word:
+            tile = self.find_letter_in_tiles(letter)
+            if tile is not None:
+                letters.append(tile)
+            else:
+                print(f"Letter '{letter}' not found in player's tiles")
+                return None
+        return letters
    
         
      

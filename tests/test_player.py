@@ -11,6 +11,15 @@ class TestPlayer(unittest.TestCase):
             0,   
         )
         self.assertEqual(player_1.score,0)
+    def test_get_score(self):
+        player=Player()
+        score=player.get_score()
+        print(score)
+        self.assertEqual(score,0)
+    def test_get_tiles(self):
+        player=Player()
+        tiles=player.get_tiles()
+        self.assertEqual(tiles,[])    
     def test_increase_score(self):
         player_1=Player()
         player_1.increse_score(2)
@@ -29,53 +38,6 @@ class TestPlayer(unittest.TestCase):
         player.exchange_tile(player.tiles[0], bag)
         self.assertFalse(tile == player.tiles[0])    
         
-        
-    def test_validate_user_has_letters(self):
-        bag_tile = BagTiles()
-        bag_tile.tiles = [
-            Tile(letter='H', value=1),
-            Tile(letter='O', value=1),
-            Tile(letter='L', value=1),
-            Tile(letter='A', value=1),
-            Tile(letter='C', value=1),
-            Tile(letter='U', value=1),
-            Tile(letter='M', value=1),
-        ]
-        player1 = Player()
-        for i in bag_tile.tiles:
-            player1.tiles.append(i)
-        tiles = [
-            Tile(letter='H', value=1),
-            Tile(letter='O', value=1),
-            Tile(letter='L', value=1),
-            Tile(letter='A', value=1),
-        ]
-        is_valid = player1.has_letters(tiles)
-        self.assertEqual(is_valid, True)
-
-    def test_validate_fail_when_user_has_not_letters(self):
-           bag_tile = BagTiles()
-           bag_tile.tiles = [
-            Tile(letter='P', value=1),
-            Tile(letter='O', value=1),
-            Tile(letter='L', value=1),
-            Tile(letter='A', value=1),
-            Tile(letter='C', value=1),
-            Tile(letter='U', value=1),
-            Tile(letter='M', value=1),
-        ]
-           player1 = Player()
-           for i in bag_tile.tiles:
-            player1.tiles.append(i)
-           tiles = [
-            Tile(letter='H', value=1),
-            Tile(letter='O', value=1),
-            Tile(letter='L', value=1),
-            Tile(letter='A', value=1),
-        ]
-
-           is_valid = player1.has_letters(tiles)
-           self.assertEqual(is_valid, False)
     def test_find_letter_in_tiles(self):
         player = Player()
         player.tiles = [Tile('A', 1), Tile('B', 3), Tile('C', 1)]
@@ -86,6 +48,27 @@ class TestPlayer(unittest.TestCase):
         player.tiles=[Tile('A', 1), Tile('B', 3), Tile('C', 1)] 
         resultado=player.find_letter_in_tiles("x")
         self.assertEqual(resultado,None)    
-            
+    def test_give_requested_tiles(self):
+        player=Player()
+        player.tiles=  [
+            Tile(letter='H', value=1),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+        ]  
+        valid=player.give_requested_tiles('HOLA')
+        list=['H','O','L','A']
+        self.assertEqual(valid,list)  
+    def test_not_give_request_tiles(self):
+        player=Player() 
+        player.tiles=  [
+            Tile(letter='H', value=1),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+        ]       
+        valid=player.give_requested_tiles('holas')
+        list=['H','O','L','A','S']
+        self.assertEqual(valid,None)
 if __name__ == '__main__':
     unittest.main()

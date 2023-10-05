@@ -1,5 +1,7 @@
 from game.cell import *
 from game.tiles import *
+class FirstWordExist(Exception):
+    pass
 
 class Board:
     def __init__(self):
@@ -81,5 +83,11 @@ class Board:
                             return True
                         self.position_row += 1 
                 return False
+   # def put_word(self,word:list[Cell],location:tuple,orientation):
         
-            
+                
+        
+ 
+                
+                
+    
