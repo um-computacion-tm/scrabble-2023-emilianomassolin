@@ -9,6 +9,8 @@ from game.player import *
 
 def main():
     print("Bienvenido!")
+    board=Board()
+    board.print_board()
     while True:
         try: 
             players_count = int(input("Ingrese cantidad de jugadores: "))
