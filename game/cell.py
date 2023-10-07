@@ -7,8 +7,13 @@ class Cell:
         self.multiplier_type = multiplier_type
         self.letter=letter
         self.state=state
-    #def __str__(self) :
-    #    return f"({self.letter},{self.state},{self.multiplier},{self.multiplier_type})"
+    def __repr__(self):
+        if self.letter:
+            return repr(self.letter)
+        if self.multiplier > 1:
+            return f'{"W" if self.multiplier_type == "word" else "L"}x{self.multiplier}'
+        else:
+            return '   '
         
         
     def add_letter(self, letter:Tile):

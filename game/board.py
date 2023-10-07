@@ -100,9 +100,4 @@ class Board:
             if center_position!=location and valid==False:
              raise NoCenterLetterException('not center')
  
-    #def print_board(self):
-    #    for row in self.grid:
-    #        row_str = " ".join(str(cell) for cell in row)
-    #        print(row_str)      
-                
-    
+   

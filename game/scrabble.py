@@ -24,6 +24,15 @@ class ScrabbleGame:
     def validate_dictionary_word(self, word):
         word = word.lower()
         return(self.dictionary.has_word(word))
+    def show_board(self): 
+     print('\n  |' + ''.join([f' {str(row_index).rjust(2)} ' for row_index in range(15)]))
+     for row_index, row in enumerate(self.board.grid):
+        print(
+            str(row_index).rjust(2) +
+            '| ' +
+            ' '.join([repr(square) for square in row])
+        )        
+    
         
 
     #    1- Validar que usuario tiene esas letras

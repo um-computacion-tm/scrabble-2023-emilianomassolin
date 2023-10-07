@@ -1,3 +1,5 @@
+2023-10-07
+create function show board
 2023-10-06
 create function put_word,change validate_word_place_board
 2023-10-05
