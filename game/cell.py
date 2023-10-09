@@ -1,6 +1,4 @@
 from game.tiles import Tile
-
-
 class Cell:
     def __init__(self,letter,state,multiplier, multiplier_type):
         self.multiplier = multiplier
@@ -14,11 +12,8 @@ class Cell:
             return f'{"W" if self.multiplier_type == "word" else "L"}x{self.multiplier}'
         else:
             return '   '
-        
-        
     def add_letter(self, letter:Tile):
         self.letter = letter
-
     def calculate_value(self):
         if self.letter is None:
             return 0

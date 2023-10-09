@@ -3,10 +3,6 @@ from game.board import *
 from game.tiles import *
 from game.scrabble import *
 from game.player import *
-
-
-
-
 def main():
     print("Bienvenido!")
     while True:

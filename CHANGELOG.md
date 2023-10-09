@@ -1,3 +1,5 @@
+2023-10-09
+add test in cell,create archive scrable_cli,change read me,create function get_name
 2023-10-08
 add function check_first_turn
 2023-10-07

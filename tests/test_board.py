@@ -1,9 +1,7 @@
 import unittest
-from game.board import *
-from game.tiles import *
+from game.board import Board,NoCenterLetterException
+from game.tiles import Tile
 from game.cell import Cell
-
-
 class TestBoard(unittest.TestCase):
     def test_init(self):
         board = Board()
@@ -25,25 +23,19 @@ class TestBoard(unittest.TestCase):
         cell=board.grid
         self.assertEqual(cell[3][3].multiplier,2)
         self.assertEqual(cell[3][3].multiplier_type,'word')
-            
     def test_word_inside_board(self):
          board= Board()
          word = "Facultad"
          location = (5, 4)
          orientation = "H"
-
          word_is_valid = board.validate_word_inside_board(word, location, orientation)
-
          assert word_is_valid == True
-    
-
     def test_word_out_of_board(self):
         board = Board()
         word = "Facultad"
         location = (4, 14)
         orientation = "H"
         word_is_valid = board.validate_word_inside_board(word, location, orientation)
-
         assert word_is_valid == False
     def test_word_inside_board_vertical(self):
         board = Board()
@@ -51,20 +43,16 @@ class TestBoard(unittest.TestCase):
         location = (5, 4)
         orientation = "V"
         word_is_valid = board.validate_word_inside_board(word, location, orientation)
-      
         assert word_is_valid == True
     def test_board_is_empty(self):
         board = Board()
         board.empty()
         assert board.is_empty == True
-         
     def test_board_is_not_empty(self):
         board = Board()
         board.grid[7][7].add_letter(Tile('C', 1))
         board.empty()
         assert board.is_empty == False
-        
-
     def test_place_word_empty_board_horizontal_fine(self):
          board = Board()
          word = "FACULTAD"
@@ -79,7 +67,6 @@ class TestBoard(unittest.TestCase):
          orientation = "H"
          word_is_valid = board.validate_word_place_board(word, location, orientation)
          assert word_is_valid == False
-       
     def test_place_word_empty_board_vertical_fine(self):
          board = Board()
          word = "FACULTAD"
@@ -94,7 +81,6 @@ class TestBoard(unittest.TestCase):
          orientation = "V"
          word_is_valid = board.validate_word_place_board(word, location, orientation)
          assert word_is_valid == False
-         
     def test_place_word_not_empty_board_horizontal_fine(self):
          board = Board()
          board.grid[7][7].add_letter(Tile('C', 1))
@@ -117,7 +103,6 @@ class TestBoard(unittest.TestCase):
         orientation = "H"
         word_is_valid = board.validate_word_place_board(word, location, orientation)
         assert word_is_valid == False
-        
     def test_place_word_not_empty_board_vertical_fine(self):
         board = Board()
         board.grid[7][7].add_letter(Tile('C', 1))
@@ -129,7 +114,6 @@ class TestBoard(unittest.TestCase):
         orientation = "V"
         word_is_valid = board.validate_word_place_board(word, location, orientation)
         assert word_is_valid == True
-    
     def test_place_word_not_empty_board_vertical_not_fine(self):
         board = Board()
         board.grid[7][7].add_letter(Tile('C', 1))
@@ -151,13 +135,11 @@ class TestBoard(unittest.TestCase):
               Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
               Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
               ]
-        
         board.put_word(word,location,orientation)
         self.assertEqual(board.grid[4][4],"C") 
         self.assertEqual(board.grid[4][5],"A")
         self.assertEqual(board.grid[4][6],"S")
         self.assertEqual(board.grid[4][7],"A")
-    
     def test_put_word_Vertical(self):
         board=Board()
         board.grid[7][7]=Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None)
@@ -168,7 +150,6 @@ class TestBoard(unittest.TestCase):
               Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
               Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
               ]
-        
         board.put_word(word,location,orientation)
         self.assertEqual(board.grid[4][4],"C") 
         self.assertEqual(board.grid[5][4],"A")
@@ -183,7 +164,6 @@ class TestBoard(unittest.TestCase):
               Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
               Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
               ]
-        
         board.put_word(word,location,orientation)
         self.assertEqual(board.grid[7][7],"C") 
         self.assertEqual(board.grid[8][7],"A")
@@ -198,7 +178,6 @@ class TestBoard(unittest.TestCase):
               Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
               Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
               ]
-        
         board.put_word(word,location,orientation)
         self.assertEqual(board.grid[7][7],"C") 
         self.assertEqual(board.grid[7][8],"A")
@@ -213,7 +192,6 @@ class TestBoard(unittest.TestCase):
               Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
               Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
               ]
-        
         with self.assertRaises(NoCenterLetterException):
           board.put_word(word,location,orientation)   
     def test_first_put_word_Vertical_no_center(self):
@@ -225,7 +203,6 @@ class TestBoard(unittest.TestCase):
               Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
               Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
               ]
-        
         with self.assertRaises(NoCenterLetterException):
           board.put_word(word,location,orientation)         
 if __name__ == '__main__':

@@ -1,8 +1,7 @@
 import unittest
 from game.player import Player
-from game.tiles import *
-
-
+from game.bag_tiles import BagTiles
+from game.tiles import Tile
 class TestPlayer(unittest.TestCase):
     def test_init(self):
         player_1 = Player()
@@ -24,7 +23,6 @@ class TestPlayer(unittest.TestCase):
         player_1=Player()
         player_1.increse_score(2)
         self.assertEqual(player_1.score,2)
-    
     def test_take_tiles_from_the_bag(self):
         Player1=Player()
         bag=BagTiles()
@@ -37,7 +35,6 @@ class TestPlayer(unittest.TestCase):
         tile = player.tiles[0]
         player.exchange_tile(player.tiles[0], bag)
         self.assertFalse(tile == player.tiles[0])    
-        
     def test_find_letter_in_tiles(self):
         player = Player()
         player.tiles = [Tile('A', 1), Tile('B', 3), Tile('C', 1)]
@@ -70,5 +67,9 @@ class TestPlayer(unittest.TestCase):
         valid=player.give_requested_tiles('holas')
         list=['H','O','L','A','S']
         self.assertEqual(valid,None)
+    def test_get_name (self):
+        player=Player()
+        player.name="emi"
+        self.assertEqual(player.get_name(),"emi")   
 if __name__ == '__main__':
     unittest.main()

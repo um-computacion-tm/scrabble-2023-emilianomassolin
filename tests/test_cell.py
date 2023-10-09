@@ -47,6 +47,21 @@ class TestCell(unittest.TestCase):
             cell.calculate_value(),
             3,
         )
+    def test_repr_with_letter(self):
+        cell = Cell("A", "active", 1, "word")
+        self.assertEqual(repr(cell),"'A'")
+
+    def test_repr_with_word_multiplier(self):
+        cell = Cell(None, "inactive", 3, "word")
+        self.assertEqual(repr(cell), 'Wx3')
+
+    def test_repr_with_letter_multiplier(self):
+        cell = Cell(None, "active", 2, "letter")
+        self.assertEqual(repr(cell), 'Lx2')
+
+    def test_repr_with_default(self):
+        cell = Cell(None, "inactive", 1, "word")
+        self.assertEqual(repr(cell), '   ')
 
 if __name__ == '__main__':
     unittest.main()
