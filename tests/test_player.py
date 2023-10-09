@@ -71,5 +71,9 @@ class TestPlayer(unittest.TestCase):
         player=Player()
         player.name="emi"
         self.assertEqual(player.get_name(),"emi")   
+    def test_set_name (self):
+        player=Player()
+        player.set_name("emi")
+        self.assertEqual(player.get_name(),"emi")   
 if __name__ == '__main__':
     unittest.main()

@@ -37,6 +37,10 @@ class Player:
     def get_tiles(self):
         return self.tiles
     def get_name(self):
-        return self.name    
+        return self.name  
+    def set_name(self,name):
+        self.name=name
+        
+          
      
          
