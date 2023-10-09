@@ -1,3 +1,5 @@
+2023-10-08
+add function check_first_turn
 2023-10-07
 create function show board
 2023-10-06

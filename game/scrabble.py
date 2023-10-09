@@ -2,6 +2,8 @@ from game.board import *
 from game.player import *
 from game.tiles import BagTiles
 from game.dictionary import*
+class end_game(Exception):
+    pass
 
 class ScrabbleGame:
     def __init__(self, players_count: int):
@@ -33,7 +35,8 @@ class ScrabbleGame:
             ' '.join([repr(square) for square in row])
         )        
     
-        
+    def check_first_turn(self):
+        return self.board.is_board_empty()
 
     #    1- Validar que usuario tiene esas letras
     #    2- Validar que la palabra entra en el tablero

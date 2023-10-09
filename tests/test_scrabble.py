@@ -1,5 +1,5 @@
 import unittest
-from game.scrabble import ScrabbleGame
+from game.scrabble import *
 from game.tiles import *
 from game.player import*
 from game.dictionary import*
@@ -37,6 +37,9 @@ class TestScrabbleGame(unittest.TestCase):
        
        game=ScrabbleGame(3)
        self.assertTrue(game.validate_dictionary_word("auto"))
+ 
+        
+           
 
 if __name__ == '__main__':
     unittest.main()
