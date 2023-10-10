@@ -34,5 +34,8 @@ class TestScrabbleGame(unittest.TestCase):
        
        game=ScrabbleGame(3)
        self.assertTrue(game.validate_dictionary_word("auto"))
+    def test_check_first_turn(self):
+        game=ScrabbleGame(3)
+        self.assertEqual(game.check_first_turn(),True)
 if __name__ == '__main__':
     unittest.main()

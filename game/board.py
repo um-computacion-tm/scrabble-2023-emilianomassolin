@@ -61,23 +61,27 @@ class Board:
                     elif orientation == "V":
                         self.position_row += 1
         return True
-    def put_word(self,word:list[Cell],location:tuple,orientation):
+    def put_word(self,word,location:tuple,orientation):
         self.empty()
         valid=self.validate_word_place_board(word,location,orientation)
         if self.is_empty==False and valid==True:            
-         for i in range(len(word)):
+         for i , j in zip(word,range(len(word))):
              if orientation == "H":
-                 self.grid[location[0]][location[1]+i]= word[i].letter.get_letter()
+                 self.grid[location[0]][location[1]+j].letter= i
+                 
              if orientation== "V":
-                 self.grid[location[0]+i][location[1]]=word[i].letter.get_letter()  
+                 self.grid[location[0]+j][location[1]].letter=i 
+                 
         if self.is_empty==True: #primer palabra
             center_position = (7,7)
             if center_position == location and valid==True:
-                for i in range(len(word)):
+                for i , j in zip(word,range(len(word))):
                  if orientation == "H":
-                  self.grid[location[0]][location[1]+i]= word[i].letter.get_letter()       
+                  self.grid[location[0]][location[1]+j].letter= i  
+               
                  if orientation== "V":
-                    self.grid[location[0]+i][location[1]]=word[i].letter.get_letter() 
+                    self.grid[location[0]+j][location[1]].letter=i 
+                    
             if center_position!=location and valid==False:
              raise NoCenterLetterException('not center')
  

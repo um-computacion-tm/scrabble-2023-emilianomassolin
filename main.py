@@ -15,8 +15,8 @@ def main():
             print("Valor invalido")
     scrabble_game = ScrabbleGame(players_count=players_count)
     scrabble_game.show_board()
-    #print("Cantidad de jugadores: ",len(scrabble_game.players))
-    #scrabble_game.next_turn()
+    print("Cantidad de jugadores: ",len(scrabble_game.players))
+#scrabble_game.next_turn()
    # #TODO while playing: loop por turno de jugador hasta que termine el juego
    # print(f"Turno del jugador {scrabble_game.current_player.id}")
    # word = input("Ingrese palabra: ")

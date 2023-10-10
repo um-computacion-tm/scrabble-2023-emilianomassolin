@@ -129,80 +129,56 @@ class TestBoard(unittest.TestCase):
         board=Board()
         location=(4,4)
         orientation="H"
-        board.grid[7][7]=Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None)
-        word=[Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
-              ]
+        board.grid[7][7].letter="A"
+        word="CASA"
         board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[4][4],"C") 
-        self.assertEqual(board.grid[4][5],"A")
-        self.assertEqual(board.grid[4][6],"S")
-        self.assertEqual(board.grid[4][7],"A")
+        self.assertEqual(board.grid[4][4].letter,"C") 
+        self.assertEqual(board.grid[4][5].letter,"A")
+        self.assertEqual(board.grid[4][6].letter,"S")
+        self.assertEqual(board.grid[4][7].letter,"A")
     def test_put_word_Vertical(self):
         board=Board()
-        board.grid[7][7]=Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None)
+        board.grid[7][7].letter="A"
         location=(4,4)
         orientation="V"
-        word=[Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
-              ]
+        word="CASA"
         board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[4][4],"C") 
-        self.assertEqual(board.grid[5][4],"A")
-        self.assertEqual(board.grid[6][4],"S")
-        self.assertEqual(board.grid[7][4],"A")    
+        self.assertEqual(board.grid[4][4].letter,"C") 
+        self.assertEqual(board.grid[5][4].letter,"A")
+        self.assertEqual(board.grid[6][4].letter,"S")
+        self.assertEqual(board.grid[7][4].letter,"A")    
     def test_first_put_word_Vertical(self):
         board=Board()
         location=(7,7)
         orientation="V"
-        word=[Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
-              ]
+        word="CASA"
         board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[7][7],"C") 
-        self.assertEqual(board.grid[8][7],"A")
-        self.assertEqual(board.grid[9][7],"S")
-        self.assertEqual(board.grid[10][7],"A")  
+        self.assertEqual(board.grid[7][7].letter,"C") 
+        self.assertEqual(board.grid[8][7].letter,"A")
+        self.assertEqual(board.grid[9][7].letter,"S")
+        self.assertEqual(board.grid[10][7].letter,"A")  
     def test_first_put_word_Horizontal(self):
         board=Board()
         location=(7,7)
         orientation="H"
-        word=[Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
-              ]
+        word="CASA"
         board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[7][7],"C") 
-        self.assertEqual(board.grid[7][8],"A")
-        self.assertEqual(board.grid[7][9],"S")
-        self.assertEqual(board.grid[7][10],"A")   
+        self.assertEqual(board.grid[7][7].letter,"C") 
+        self.assertEqual(board.grid[7][8].letter,"A")
+        self.assertEqual(board.grid[7][9].letter,"S")
+        self.assertEqual(board.grid[7][10].letter,"A")   
     def test_first_put_word_Horizontal_no_center(self):
         board=Board()
         location=(7,8)
         orientation="H"
-        word=[Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
-              ]
+        word="casa"
         with self.assertRaises(NoCenterLetterException):
           board.put_word(word,location,orientation)   
     def test_first_put_word_Vertical_no_center(self):
         board=Board()
         location=(8,9)
         orientation="V"
-        word=[Cell(letter=Tile("C",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("S",1),state=None,multiplier=1,multiplier_type=None),
-              Cell(letter=Tile("A",1),state=None,multiplier=1,multiplier_type=None)
-              ]
+        word="CASA"
         with self.assertRaises(NoCenterLetterException):
           board.put_word(word,location,orientation)         
 if __name__ == '__main__':

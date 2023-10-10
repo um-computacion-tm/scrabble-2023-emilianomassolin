@@ -74,6 +74,10 @@ class TestPlayer(unittest.TestCase):
     def test_set_name (self):
         player=Player()
         player.set_name("emi")
-        self.assertEqual(player.get_name(),"emi")   
+        self.assertEqual(player.get_name(),"emi") 
+    def test_show_tiles(self):
+        player=Player()
+        player.tiles=["A","B"]
+        self.assertEqual(player.show_tiles(),["A","B"])  
 if __name__ == '__main__':
     unittest.main()

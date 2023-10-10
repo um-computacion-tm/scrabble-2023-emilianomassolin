@@ -37,7 +37,20 @@ class ScrabbleGame:
             ' '.join([repr(square) for square in row])
         )        
     def check_first_turn(self):
-        return self.board.is_board_empty()
+        self.board.empty()
+        return self.board.is_empty
+   # def play_turn(self):
+   #     word = input("Give a word to enter: ").lower()
+   #     row = int(input("starting position row: "))
+   #     column = int(input("starting position column: "))
+   #     location=(row,column)
+   #     direction = input("Select direction (H or V: )")
+   #     word = self.players[self.current_player].give_requested_tiles(word)
+   #     self.board.put_word(word, location, direction)
+   #     self.players[self.current_player].forfeit_tiles(word)
+   #     self.players[self.current_player].increse_score(word_score(self.last_word))
+   #     self.next_turn()
+
 
 
 

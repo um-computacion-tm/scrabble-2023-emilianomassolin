@@ -15,14 +15,13 @@ class Player:
                 popped = self.tiles.pop(i)
                 bag.put([popped])
                 break
-        self.tiles.extend(bag.take(1))      
-    
-    def find_letter_in_tiles(self, letter):
+        self.tiles.extend(bag.take(1))       
+    def find_letter_in_tiles(self, letter): #Encontrar letra en tiles
         for tile in self.tiles:
             if tile.get_letter() == letter.upper():
                 return tile.get_letter()
         return None  
-    def give_requested_tiles(self, word):
+    def give_requested_tiles(self, word): #verificar q con las tiles formas la palabra
         letters = []
         for letter in word:
             tile = self.find_letter_in_tiles(letter)
@@ -32,6 +31,8 @@ class Player:
                 print(f"Letter '{letter}' not found in player's tiles")
                 return None
         return letters
+    def show_tiles(self):
+        return self.tiles
     def get_score(self):
         return self.score
     def get_tiles(self):
