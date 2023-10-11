@@ -54,22 +54,22 @@ class ScrabbleGame:
    #     self.players[self.current_player].increse_score(word_score(self.last_word))
    #     self.next_turn()
     
-    #def full_board(self):
-    #    for row in self.board.grid:
-    #        for cell in row:
-    #            if cell.letter == None:
-    #                return False
-    #    return True
+    def full_board(self):
+        for row in self.board.grid:
+            for cell in row:
+                if cell.letter == None:
+                    return False
+        return True
     
-    #def end_game(self):
-    #    full_board = self.full_board()
-    #    if full_board==True:
-    #        raise end_game
-    #    elif len(self.bag_tiles.tiles)==0:
-    #            if len(self.current_player.tiles)==0:
-    #                raise end_game
-    #    else:
-    #        pass  
+    def end_game(self):
+        full_board = self.full_board()
+        if full_board==True:
+            raise end_game
+        elif len(self.bag_tiles.tiles)==0:
+                if len(self.current_player.tiles)==0:
+                    raise end_game
+        else:
+            pass  
     def show_current_player(self):
         print(f"Turno del jugador {self.current_player.name}")
     #def fill_current_player_tiles(self):

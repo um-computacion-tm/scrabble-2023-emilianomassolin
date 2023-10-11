@@ -1,4 +1,6 @@
 
+2023-10-11
+create function full board and end game
 2023-10-10
 create function show tile,change put word,modicate code climate,show score
 2023-10-09
