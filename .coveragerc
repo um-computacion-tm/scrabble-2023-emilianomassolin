@@ -17,3 +17,16 @@ exclude_lines =
     if __name__ == '__main__':
     def suite
     __str__
+    __repr__
+    actual_turn
+    end_game 
+    exchange_index_tile
+    end_current_turn
+    show_tiles
+    show_board
+    count
+
+
+
+    
+

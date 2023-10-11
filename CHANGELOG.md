@@ -1,5 +1,6 @@
+
 2023-10-10
-create function show tile,change put word
+create function show tile,change put word,modicate code climate,show score
 2023-10-09
 add test in cell,create archive scrable_cli,change read me,create function get_name and set_name
 2023-10-08

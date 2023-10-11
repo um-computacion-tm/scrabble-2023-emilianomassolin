@@ -29,7 +29,7 @@ TILES = [
     {"letter": "X", "value": 8, "quantity": 1},
     {"letter": "Y", "value": 4, "quantity": 1},
     {"letter": "Z", "value": 10, "quantity": 1},
-    {"letter": "_", "value": 0, "quantity": 2}  
+    {"letter": "?", "value": 0, "quantity": 2}  
 ]
 class BagTiles:
     def __init__(self):
@@ -40,6 +40,8 @@ class BagTiles:
         random.shuffle(self.tiles)
     def take(self, count):
         tiles = []
+        if count > len(self.tiles):
+            count = len(self.tiles)
         for _ in range(count):
             tiles.append(self.tiles.pop())
         return tiles
