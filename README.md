@@ -10,4 +10,4 @@ Scrabble is a word game in which two to four players score points by placing til
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b8ec7cf60fa1e0f448f8/test_coverage)](https://codeclimate.com/github/um-computacion-tm/scrabble-2023-emilianomassolin/test_coverage)
 
-### Author: **Emiliano Massolin**
+### Author: **Emiliano Massolin** :coffee:
