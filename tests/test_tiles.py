@@ -49,5 +49,13 @@ class TestBagTiles(unittest.TestCase):
             len(bag.tiles),
             102,
         )
+    def test_shuffle(self):
+        bag_1 = BagTiles()
+        bag_1.tiles =  [Tile('Z', 1), Tile('Y', 1), Tile('D', 1), Tile('C', 1), Tile('B', 1), Tile('A', 1)]
+        bag_2 = BagTiles()
+        bag_2.tiles = bag_1.tiles.copy()
+        bag_2.shuffle_bag()
+        self.assertNotEqual(bag_1.tiles, bag_2.tiles)
+        self.assertCountEqual(bag_1.tiles, bag_2.tiles)    
 if __name__ == '__main__':
     unittest.main()

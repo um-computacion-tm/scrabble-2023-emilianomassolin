@@ -38,6 +38,8 @@ class BagTiles:
             for j in range(i.get('quantity')):
                 self.tiles.append(Tile(i.get("letter"),i.get("value")))
         random.shuffle(self.tiles)
+    def shuffle_bag(self):
+        random.shuffle(self.tiles)
     def take(self, count):
         tiles = []
         if count > len(self.tiles):

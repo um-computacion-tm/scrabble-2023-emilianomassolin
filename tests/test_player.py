@@ -1,5 +1,5 @@
 import unittest
-from game.player import Player
+from game.player import Player,NoLetterException
 from game.bag_tiles import BagTiles
 from game.tiles import Tile
 class TestPlayer(unittest.TestCase):
@@ -64,9 +64,9 @@ class TestPlayer(unittest.TestCase):
             Tile(letter='L', value=1),
             Tile(letter='A', value=1),
         ]       
-        valid=player.give_requested_tiles('holas')
-        list=['H','O','L','A','S']
-        self.assertEqual(valid,None)
+        with self.assertRaises(NoLetterException):
+         player.give_requested_tiles('holas')
+  
     def test_get_name (self):
         player=Player()
         player.name="emi"

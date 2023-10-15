@@ -1,4 +1,6 @@
 from game.bag_tiles import BagTiles
+class NoLetterException(Exception):
+    pass
 class Player:
     def __init__(self):
         self.name=""
@@ -15,6 +17,7 @@ class Player:
                 popped = self.tiles.pop(i)
                 bag.put([popped])
                 break
+        bag.shuffle_bag()
         self.tiles.extend(bag.take(1))       
     def find_letter_in_tiles(self, letter): #Encontrar letra en tiles
         for tile in self.tiles:
@@ -28,8 +31,7 @@ class Player:
             if tile is not None:
                 letters.append(tile)
             else:
-                print(f"Letter '{letter}' not found in player's tiles")
-                return None
+                raise NoLetterException(f"Letter '{letter}' not found in player's tiles")
         return letters
     def show_tiles(self):
         return self.tiles

@@ -65,14 +65,14 @@ class TestScrabbleGame(unittest.TestCase):
           scrabble_game.end_game()    
         
 
-    #def test_fill_player_tiles(self):
-    #    scrabble_game = ScrabbleGame(players_count=2)
-    #    scrabble_game.current_player = scrabble_game.players[0]
-    #    scrabble_game.bag_tiles.tiles = [
-    #        Tile(letter="H", value=3)  
-    #        ]
-    #    scrabble_game.fill_current_player_tiles()
-    #    self.assertEqual(scrabble_game.current_player.tiles[0].letter, "H")
-    #    self.assertEqual(scrabble_game.current_player.tiles[0].value, 3)  
+    def test_fill_player_tiles(self):
+        scrabble_game = ScrabbleGame(players_count=2)
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.bag_tiles.tiles = [
+            Tile(letter="H", value=3)  
+            ]
+        scrabble_game.fill_current_player_tiles()
+        self.assertEqual(scrabble_game.current_player.tiles[0].letter, "H")
+        self.assertEqual(scrabble_game.current_player.tiles[0].value, 3)  
 if __name__ == '__main__':
     unittest.main()

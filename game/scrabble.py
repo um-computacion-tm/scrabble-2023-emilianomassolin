@@ -1,7 +1,7 @@
-from game.board import Board
-from game.player import Player
+from game.board import Board,NoCenterLetterException
+from game.player import Player,NoLetterException
 from game.bag_tiles import BagTiles
-from game.dictionary import Dictionary
+from game.dictionary import Dictionary,NoDictoniaryException
 from game.tiles import Tile
 class end_game(Exception):
     pass
@@ -72,67 +72,73 @@ class ScrabbleGame:
             pass  
     def show_current_player(self):
         print(f"Turno del jugador {self.current_player.name}")
-    #def fill_current_player_tiles(self):
-    #    self.current_player.tiles.extend(self.bag_tiles.take(7-len(self.current_player.tiles)))  
-    #def show_tiles(self):
-    #    lista=self.current_player.tiles
-    #    for i in lista:
-    #        print(i.get_letter(), end=" , ")
-    #    print(" ")    
-    def show_score(self):
-        print("su puntaje es :",self.current_player.score)  
+    def fill_current_player_tiles(self):
+        self.current_player.tiles.extend(self.bag_tiles.take(7-len(self.current_player.tiles)))  
+    def show_tiles(self):
+        lista=self.current_player.tiles
+        for i in lista:
+            print(i.get_letter(), end=" , ")
+        print(" ")    
+    #def show_score(self):
+    #    print("su puntaje es :",self.current_player.score)  
     #def exchange_index_tile(self):
     #    index_exchange = int(input(f"Ingrese indice de ficha a cambiar (0-{len(self.current_player.tiles)-1}): "))
     #    tile_exchange = self.current_player.tiles[index_exchange]
     #    self.current_player.exchange_tile(tile_exchange ,self.bag_tiles)  
-    def end_current_turn(self):
-        raise end_turn  
+    #def end_current_turn(self):
+    #    raise end_turn  
+    #def play_game(self):
+    #    try:
+    #        word=input("Coloque la palabra: ").upper()
+    #        first_row=int(input("coloque la fila: "))
+    #        first_col=int(input("coloque la columna: "))
+    #        orientation=input("colocar orientacion H O V: ").upper()
+    #        location=(first_row,first_col)
+    #        self.current_player.give_requested_tiles(word)
+    #        self.dictionary.has_word(word)
+    #        self.board.put_word(word,location,orientation)
+    #    except  NoCenterLetterException:
+    #        print("NOT CENTER")
+    #    except NoDictoniaryException:
+    #        print("THE WORD DOES NOT EXIST")    
+    #    except NoLetterException:
+    #        print("LETTER NOT FOUND IN PLAYER TILES")
                 
-    #def actual_turn(self):
-    #    self.fill_current_player_tiles()
-    #    while True:
-    #        option = int(input(
-    #            "Indique un número:\n"
-    #            "0. Colocar palabra\n"
-    #            "1. Mostrar Tiles\n"
-    #            "2. Mostrar Tablero\n"
-    #            "3. Mostrar Puntaje\n"
-    #            "4. Intercambiar Fichas\n"
-    #            "5. Terminar turno\n"
-    #            "6. Salir\n"
-    #            "= "
-    #        ))
-    #        try:
-    #            if option == 0:   
-    #                word=input("Coloque la palabra").upper()
-    #                first_row=int(input("coloque la fila"))
-    #                first_col=int(input("coloque la columna"))
-    #                orientation=input("colocar orientacion H O V").upper()
-    #                location=(first_row,first_col)
-    #                self.current_player.give_requested_tiles(word)
-    #                self.dictionary.has_word(word)
-    #                self.board.put_word(word,location,orientation)
-#
-    #            elif option == 1:
-    #                self.show_tiles()                
-    #            elif option == 2:
-    #                self.show_board()
-    #            elif option == 3:
-    #                self.show_score() 
-    #            elif option == 4:
-    #                tile_changes = int(input("Indique la cantidad de cambios a realizar: "))
-    #                for _ in range(tile_changes):
-    #                    self.exchange_index_tile()
-    #                    self.show_tiles()
-    #                self.end_current_turn() 
-    #            elif option == 5:
-    #                self.end_current_turn()
-    #            elif option == 6:
-    #                raise end_game  
-    #            else:
-    #                pass
-    #        except end_turn:
-    #            print("Fin del turno")
-    #            break
-#
-    
+   # def actual_turn(self):
+   #     self.fill_current_player_tiles()
+   #     while True:
+   #         option = int(input(
+   #             "Indique un número:\n"
+   #             "0. Colocar palabra\n"
+   #             "1. Mostrar Tiles\n"
+   #             "2. Mostrar Tablero\n"
+   #             "3. Mostrar Puntaje\n"
+   #             "4. Intercambiar Fichas\n"
+   #             "5. Terminar turno\n"
+   #             "6. Salir\n"
+   #             "= "
+   #         ))
+   #         try:
+   #             if option == 0: 
+   #                 self.play_game()  
+   #             elif option == 1:
+   #                 self.show_tiles()                
+   #             elif option == 2:
+   #                 self.show_board()
+   #             elif option == 3:
+   #                 self.show_score() 
+   #             elif option == 4:
+   #                 tile_changes = int(input("Indique la cantidad de cambios a realizar: "))
+   #                 for _ in range(tile_changes):
+   #                     self.exchange_index_tile()
+   #                     self.show_tiles()
+   #                 self.end_current_turn() 
+   #             elif option == 5:
+   #                 self.end_current_turn()
+   #             elif option == 6:
+   #                 raise end_game  
+   #             else:
+   #                 pass
+   #         except end_turn:
+   #             print("Fin del turno")
+   #             break
