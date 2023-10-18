@@ -1,4 +1,6 @@
 
+2023-10-18
+add function show score ,end _current_turn.
 2023-10-16
 echange_index_tile
 2023-10-15

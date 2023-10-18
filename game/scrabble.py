@@ -79,14 +79,14 @@ class ScrabbleGame:
         for i in lista:
             print(i.get_letter(), end=" , ")
         print(" ")    
-    #def show_score(self):
-    #    print("su puntaje es :",self.current_player.score)  
+    def show_score(self):
+        print("su puntaje es :",self.current_player.score)  
     def exchange_index_tile(self):
         index_exchange = int(input(f"Ingrese indice de ficha a cambiar (0-{len(self.current_player.tiles)-1}): "))
         tile_exchange = self.current_player.tiles[index_exchange]
         self.current_player.exchange_tile(tile_exchange ,self.bag_tiles)  
-    #def end_current_turn(self):
-    #    raise end_turn  
+    def end_current_turn(self):
+        raise end_turn  
     #def play_game(self):
     #    try:
     #        word=input("Coloque la palabra: ").upper()
