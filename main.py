@@ -17,13 +17,13 @@ def main():
     for i in range(players_count):
         nombre = str(input(f"Indique nombre de jugador {i+1}: " ))
         scrabble_game.players[i].name = nombre
-   # while True:
-   #     try:
-   #         scrabble_game.next_turn()
-   #         scrabble_game.end_game()
-   #         scrabble_game.show_current_player()
-   #         scrabble_game.actual_turn()
-   #     except   end_game:
-   #         print("END GAME")
-   #         break     
+    while True:
+        try:
+            scrabble_game.next_turn()
+            scrabble_game.end_game()
+            scrabble_game.show_current_player()
+            scrabble_game.actual_turn()
+        except   end_game:
+            print("END GAME")
+            break     
 main()        

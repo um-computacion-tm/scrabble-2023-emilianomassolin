@@ -1,4 +1,6 @@
+from io import StringIO
 import unittest
+from unittest.mock import patch
 from game.scrabble import ScrabbleGame
 from game.tiles import Tile
 from game.player import Player
@@ -74,5 +76,11 @@ class TestScrabbleGame(unittest.TestCase):
         scrabble_game.fill_current_player_tiles()
         self.assertEqual(scrabble_game.current_player.tiles[0].letter, "H")
         self.assertEqual(scrabble_game.current_player.tiles[0].value, 3)  
+    
+   
+   
+   
+   
+    
 if __name__ == '__main__':
     unittest.main()

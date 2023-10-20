@@ -1,4 +1,6 @@
-
+ 
+2023-10-19
+actual turn
 2023-10-18
 add function show score ,end _current_turn.
 2023-10-16
@@ -31,7 +33,6 @@ create function exchange_tile
 create function take_tiles_from_the_bag.
 2023-09-29
 create function increase_score with test , fix some features to improve maintainability and change init player
-
 2023-09-28
 create function add bonus with test.
 2023-09-27
