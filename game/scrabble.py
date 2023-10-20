@@ -76,22 +76,22 @@ class ScrabbleGame:
         self.current_player.exchange_tile(tile_exchange ,self.bag_tiles)  
     def end_current_turn(self):
         raise end_turn  
-    #def play_game(self):
-    #    try:
-    #        word=input("Coloque la palabra: ").upper()
-    #        first_row=int(input("coloque la fila: "))
-    #        first_col=int(input("coloque la columna: "))
-    #        orientation=input("colocar orientacion H O V: ").upper()
-    #        location=(first_row,first_col)
-    #        self.current_player.give_requested_tiles(word)
-    #        self.dictionary.has_word(word)
-    #        self.board.put_word(word,location,orientation)
-    #    except  NoCenterLetterException:
-    #        print("NOT CENTER")
-    #    except NoDictoniaryException:
-    #        print("THE WORD DOES NOT EXIST")    
-    #    except NoLetterException:
-    #        print("LETTER NOT FOUND IN PLAYER TILES")
+    def play_game(self):
+        try:
+            word=input("Coloque la palabra: ").upper()
+            first_row=int(input("coloque la fila: "))
+            first_col=int(input("coloque la columna: "))
+            orientation=input("colocar orientacion H O V: ").upper()
+            location=(first_row,first_col)
+            self.current_player.give_requested_tiles(word)
+            self.dictionary.has_word(word)
+            self.board.put_word(word,location,orientation)
+        except  NoCenterLetterException:
+            print("NOT CENTER")
+        except NoDictoniaryException:
+            print("THE WORD DOES NOT EXIST")    
+        except NoLetterException:
+            print("LETTER NOT FOUND IN PLAYER TILES")
                 
     def actual_turn(self):
         self.fill_current_player_tiles()

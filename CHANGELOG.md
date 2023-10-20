@@ -1,4 +1,5 @@
- 
+2023-10-20
+function play game
 2023-10-19
 actual turn
 2023-10-18

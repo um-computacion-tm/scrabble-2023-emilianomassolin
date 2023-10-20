@@ -15,8 +15,7 @@ exclude_lines =
     return raw_input
     if __name__ == '__main__':
     def suite
-    __str__
-    __repr__
+    
     actual_turn
     end_game 
     exchange_index_tile
