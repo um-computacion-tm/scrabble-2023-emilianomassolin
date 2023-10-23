@@ -7,6 +7,8 @@ class end_game(Exception):
     pass
 class end_turn(Exception):
     pass
+class invalid_word(Exception):
+    pass
 class ScrabbleGame:
     def __init__(self, players_count: int):
         self.board = Board()
@@ -76,6 +78,7 @@ class ScrabbleGame:
         self.current_player.exchange_tile(tile_exchange ,self.bag_tiles)  
     def end_current_turn(self):
         raise end_turn  
+    
     def play_game(self):
         try:
             word=input("Coloque la palabra: ").upper()

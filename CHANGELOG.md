@@ -1,3 +1,6 @@
+
+2023-10-22
+add function set_letter
 2023-10-20
 function play game
 2023-10-19
