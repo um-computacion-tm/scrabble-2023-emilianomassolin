@@ -180,6 +180,7 @@ class TestBoard(unittest.TestCase):
         orientation="V"
         word="CASA"
         with self.assertRaises(NoCenterLetterException):
-          board.put_word(word,location,orientation)         
+          board.put_word(word,location,orientation)  
+          
 if __name__ == '__main__':
     unittest.main()

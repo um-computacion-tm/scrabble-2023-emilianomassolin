@@ -49,6 +49,10 @@ class TestBagTiles(unittest.TestCase):
             len(bag.tiles),
             102,
         )
+    def test_set_letter(self):
+        tile = Tile('A', 1)
+        tile.set_letter("B")
+        self.assertEqual(tile.letter, "B")
     def test_shuffle(self):
         bag_1 = BagTiles()
         bag_1.tiles =  [Tile('Z', 1), Tile('Y', 1), Tile('D', 1), Tile('C', 1), Tile('B', 1), Tile('A', 1)]
@@ -56,6 +60,10 @@ class TestBagTiles(unittest.TestCase):
         bag_2.tiles = bag_1.tiles.copy()
         bag_2.shuffle_bag()
         self.assertNotEqual(bag_1.tiles, bag_2.tiles)
-        self.assertCountEqual(bag_1.tiles, bag_2.tiles)    
+        self.assertCountEqual(bag_1.tiles, bag_2.tiles)   
+    def test_repr_with_tile(self):
+        tile = Tile("A",1)
+        expected = "(A, 1)"  
+        self.assertEqual(repr(tile), expected) 
 if __name__ == '__main__':
     unittest.main()

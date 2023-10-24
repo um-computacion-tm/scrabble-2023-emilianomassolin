@@ -21,7 +21,11 @@ class Board:
         for l in DOUBLE_LETTER_SCORE:
             self.grid[l[0]][l[1]] = Cell(None,'activate',2,'letter')
     def validate_word_inside_board(self, word, location, orientation):
-        self.word = word
+        if isinstance(word, list): 
+                for i in word:
+                    self.word = [letter.upper() for letter in word]
+        else:
+            self.word = word.upper()
         self.orientation = orientation
         self.position_row = location[0]
         self.position_col = location[1] 
@@ -30,37 +34,53 @@ class Board:
         elif orientation == 'V' and len(self.word)<=15-self.position_row:
             return True
         else:
-            return False   
+            return False
     def empty(self):
         if self.grid[7][7].letter == None:
             self.is_empty = True
         else:
             self.is_empty = False
+    def validate_word_place_board_is_empty(self, orientation):
+        for i in self.word:
+            if self.position_row == 7 and self.position_col == 7:
+                return True
+            if orientation == "H":
+                self.position_col += 1
+            elif orientation == "V":
+                self.position_row += 1
+        return False      
+    
+    def validate_word_place_board_is_not_empty(self, orientation):
+        for i in self.word:
+            cell = self.grid[self.position_row][self.position_col]
+            if cell.letter is not None and i != cell.letter.letter:
+                return False
+            if cell.letter is not None and cell.letter.letter == i:
+                if isinstance(self.missing_letters,list):
+                    self.missing_letters = [letter for letter in self.missing_letters if letter != i]
+                else:
+                    self.missing_letters = self.missing_letters.replace(i, "")
+            if orientation == "H":
+                self.position_col += 1
+            elif orientation == "V":
+                self.position_row += 1
+        return True
+    
     def validate_word_place_board(self, word, location, orientation):
-        self.word = word
+        if isinstance(word, list): 
+                for i in word:
+                    word = [letter.upper() for letter in word]
+        else:
+            word = word.upper()
         valid = self.validate_word_inside_board(word, location, orientation)
         self.empty()
+        self.missing_letters = word
         if valid==True:
             if self.is_empty==True:
-                for i in self.word:
-                    if (self.position_row == 7 and self.position_col == 7) or \
-                    (self.position_col == 7 and self.position_row == 7):
-                        return True
-                    if orientation == "H":
-                        self.position_col += 1
-                    elif orientation == "V":
-                        self.position_row += 1
-                return False
+                return self.validate_word_place_board_is_empty(orientation)
             else:
-                for i in self.word:
-                    cell = self.grid[self.position_row][self.position_col]
-                    if cell.letter is not None and i != cell.letter.letter:
-                        return False
-                    if orientation == "H":
-                        self.position_col += 1
-                    elif orientation == "V":
-                        self.position_row += 1
-        return True
+                return self.validate_word_place_board_is_not_empty(orientation)
+        return False
     def put_word(self,word,location:tuple,orientation):
         self.empty()
         valid=self.validate_word_place_board(word,location,orientation)

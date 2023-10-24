@@ -1,6 +1,6 @@
 
-2023-10-22
-add function set_letter
+2023-10-24
+add function set_letter,maintained and add test,add function repr
 2023-10-20
 function play game
 2023-10-19
