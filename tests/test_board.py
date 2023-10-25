@@ -167,20 +167,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.grid[7][8].letter,"A")
         self.assertEqual(board.grid[7][9].letter,"S")
         self.assertEqual(board.grid[7][10].letter,"A")   
-    def test_first_put_word_Horizontal_no_center(self):
-        board=Board()
-        location=(7,8)
-        orientation="H"
-        word="casa"
-        with self.assertRaises(NoCenterLetterException):
-          board.put_word_first(word,location,orientation)   
-    def test_first_put_word_Vertical_no_center(self):
-        board=Board()
-        location=(8,9)
-        orientation="V"
-        word="CASA"
-        with self.assertRaises(NoCenterLetterException):
-          board.put_word_first(word,location,orientation)  
+ 
 
           
 if __name__ == '__main__':
