@@ -17,6 +17,10 @@ class Cell:
                 return f"[{self.multiplier_type}x{self.multiplier}]"
     def add_letter(self, letter:Tile):
         self.letter = letter
+    def has_tile(self):
+        return self.letter is not None   
+    
+
     def calculate_value(self):
         if self.letter is None:
             return 0

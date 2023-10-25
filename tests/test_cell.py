@@ -66,7 +66,14 @@ class TestCell(unittest.TestCase):
         cell = Cell(letter=None, state=True, multiplier=2, multiplier_type="letter")
         expected = "[letterx2]"
         self.assertEqual(repr(cell), expected)
-
+    def test_has_tile(self):
+        cell = Cell(letter=None , state=True , multiplier=1, multiplier_type="")
+        letter = Tile(letter='p', value=3)
+        cell.add_letter(letter=letter)
+        
+        validation = cell.has_tile()
+        
+        self.assertEqual(validation, True)
  
 
 if __name__ == '__main__':

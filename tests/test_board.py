@@ -17,12 +17,12 @@ class TestBoard(unittest.TestCase):
         board = Board()
         cell = board.grid
         self.assertEqual(cell[0][0].multiplier,3 )
-        self.assertEqual(cell[0][0].multiplier_type,'word' )
+        self.assertEqual(cell[0][0].multiplier_type,'W' )
     def test_board_cell_33(self):
         board=Board()
         cell=board.grid
         self.assertEqual(cell[3][3].multiplier,2)
-        self.assertEqual(cell[3][3].multiplier_type,'word')
+        self.assertEqual(cell[3][3].multiplier_type,'W')
     def test_word_inside_board(self):
          board= Board()
          word = "Facultad"
@@ -181,6 +181,7 @@ class TestBoard(unittest.TestCase):
         word="CASA"
         with self.assertRaises(NoCenterLetterException):
           board.put_word(word,location,orientation)  
+
           
 if __name__ == '__main__':
     unittest.main()

@@ -1,4 +1,5 @@
-
+2023-10-25
+code climate local and change git ignore , add function has tile
 2023-10-24
 add function set_letter,maintained and add test,add function repr  tile, change repr cell
 2023-10-20

@@ -2,7 +2,6 @@
 source =
     game
     tests
-    
 omit =
     env/*
     */test*
@@ -13,16 +12,10 @@ exclude_lines =
     def setUp
     def test_
     return raw_input
+    print
     if __name__ == '__main__':
     def suite
-    
-    actual_turn
-    end_game 
-    exchange_index_tile
-    end_current_turn
-    show_tiles
-    show_board
-    count
+    __str__
 
 
 
