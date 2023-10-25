@@ -6,12 +6,15 @@ class Cell:
         self.letter=letter
         self.state=state
     def __repr__(self):
-        if self.letter:
-            return repr(self.letter)
-        if self.multiplier > 1:
-            return f'{"W" if self.multiplier_type == "word" else "L"}x{self.multiplier}'
+        if self.letter != None:
+            if self.letter.letter in ("CH", "RR", "LL"):
+                return f"[{self.letter.letter} ]"  
+            return f"[ {self.letter.letter} ]"    
         else:
-            return '   '
+            if self.multiplier == 1:
+                return f"[   ]"
+            else:
+                return f"[{self.multiplier_type}x{self.multiplier}]"
     def add_letter(self, letter:Tile):
         self.letter = letter
     def calculate_value(self):

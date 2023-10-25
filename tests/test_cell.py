@@ -48,20 +48,26 @@ class TestCell(unittest.TestCase):
             3,
         )
     def test_repr_with_letter(self):
-        cell = Cell("A", "active", 1, "word")
-        self.assertEqual(repr(cell),"'A'")
+        cell = Cell(letter=Tile("X",1), state=True, multiplier=1, multiplier_type=None)
+        expected = "[ X ]"  
+        self.assertEqual(repr(cell), expected)
 
-    def test_repr_with_word_multiplier(self):
-        cell = Cell(None, "inactive", 3, "word")
-        self.assertEqual(repr(cell), 'Wx3')
+    def test_repr_with_tile_2_letters(self):
+        cell = Cell(letter=Tile("CH",1), state=True ,multiplier=1,multiplier_type=None)
+        expected = "[CH ]"  
+        self.assertEqual(repr(cell), expected)
 
-    def test_repr_with_letter_multiplier(self):
-        cell = Cell(None, "active", 2, "letter")
-        self.assertEqual(repr(cell), 'Lx2')
+    def test_repr_without_letter(self):
+        cell = Cell(letter=None, state=True, multiplier=1, multiplier_type=None)
+        expected = "[   ]"
+        self.assertEqual(repr(cell), expected)
 
-    def test_repr_with_default(self):
-        cell = Cell(None, "inactive", 1, "word")
-        self.assertEqual(repr(cell), '   ')
+    def test_repr_with_multiplier(self):
+        cell = Cell(letter=None, state=True, multiplier=2, multiplier_type="letter")
+        expected = "[letterx2]"
+        self.assertEqual(repr(cell), expected)
+
+ 
 
 if __name__ == '__main__':
     unittest.main()

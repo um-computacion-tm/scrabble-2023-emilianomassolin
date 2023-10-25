@@ -105,4 +105,6 @@ class Board:
             if center_position!=location and valid==False:
              raise NoCenterLetterException('not center')
  
-   
+    def check_center_square(self, row, col):
+        center = self.grid[row][col]
+        return center
