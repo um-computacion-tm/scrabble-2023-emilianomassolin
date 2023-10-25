@@ -105,5 +105,3 @@ class Board:
                  if orientation== "V":
                     self.grid[location[0]+j][location[1]].letter=i 
                     
-            if center_position!=location and valid==False:
-             raise NoCenterLetterException('not center')
