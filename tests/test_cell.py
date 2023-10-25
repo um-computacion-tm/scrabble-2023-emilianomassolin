@@ -74,7 +74,13 @@ class TestCell(unittest.TestCase):
         validation = cell.has_tile()
         
         self.assertEqual(validation, True)
- 
+    def test_get_letter(self):
+        cell = Cell(letter=None, state=True, multiplier=1, multiplier_type="")
+        letter = Tile(letter='p', value=3)
+        cell.add_letter(letter)
+        tile = cell.get_tile()
+        self.assertEqual(tile.letter,"p")
+        self.assertEqual(tile.value,3)
 
 if __name__ == '__main__':
     unittest.main()

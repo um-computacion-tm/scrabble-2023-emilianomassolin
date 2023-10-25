@@ -20,6 +20,9 @@ class Cell:
     def has_tile(self):
         return self.letter is not None   
     
+    def get_tile(self):
+        return self.letter
+    
 
     def calculate_value(self):
         if self.letter is None:
