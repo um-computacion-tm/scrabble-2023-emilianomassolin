@@ -19,21 +19,18 @@ class Cell:
         self.letter = letter
     def has_tile(self):
         return self.letter is not None   
-    
     def get_tile(self):
         return self.letter
-    
     def activate_cell(self):
         if self.state == False:
             self.state = True
-    
     def deactivate_cell(self):
         if self.state == True:
             self.state = False
     def calculate_value(self):
         if self.letter is None:
             return 0
-        if self.multiplier_type == 'letter'and self.state==True:
+        if self.multiplier_type == 'L'and self.state==True:
             return self.letter.value * self.multiplier
         else:
             return self.letter.value
@@ -46,7 +43,7 @@ class calculate_word:
             value_letra=Cell.calculate_value(letras)
             value+=value_letra
         for letras in self.word:
-            if letras.multiplier_type == 'word' and letras.state == True:
+            if letras.multiplier_type == 'W' and letras.state == True:
                 value = value * letras.multiplier
         return value    
     

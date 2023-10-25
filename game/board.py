@@ -92,6 +92,9 @@ class Board:
              if orientation== "V":
                  self.grid[location[0]+j][location[1]].letter=i 
                  
+    def put_word_first(self,word,location:tuple,orientation):
+        self.empty()
+        valid=self.validate_word_place_board(word,location,orientation)
         if self.is_empty==True: #primer palabra
             center_position = (7,7)
             if center_position == location and valid==True:
