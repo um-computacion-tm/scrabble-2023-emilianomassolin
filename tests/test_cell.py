@@ -81,6 +81,15 @@ class TestCell(unittest.TestCase):
         tile = cell.get_tile()
         self.assertEqual(tile.letter,"p")
         self.assertEqual(tile.value,3)
+    def test_activate_cell(self):
+        cell = Cell(letter=None, state=False, multiplier=2, multiplier_type="W")
+        cell.activate_cell()
+        self.assertEqual(cell.state,True)
+    
+    def test_deactivate_cell(self):
+        cell = Cell(letter=None, state=True, multiplier=2, multiplier_type="W")
+        cell.deactivate_cell()
+        self.assertEqual(cell.state,False)    
 
 if __name__ == '__main__':
     unittest.main()

@@ -23,7 +23,13 @@ class Cell:
     def get_tile(self):
         return self.letter
     
-
+    def activate_cell(self):
+        if self.state == False:
+            self.state = True
+    
+    def deactivate_cell(self):
+        if self.state == True:
+            self.state = False
     def calculate_value(self):
         if self.letter is None:
             return 0
