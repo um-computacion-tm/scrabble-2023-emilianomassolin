@@ -79,5 +79,229 @@ class TestPlayer(unittest.TestCase):
         player=Player()
         player.tiles=["A","B"]
         self.assertEqual(player.show_tiles(),["A","B"])  
+    def test_validate_user_has_letters(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='H', value=4),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+            Tile(letter='C', value=3),
+            Tile(letter='U', value=1),
+            Tile(letter='M', value=3),
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = [
+            Tile(letter='H', value=4),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+        ]
+        
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, True)
+
+    def test_validate_fail_when_user_has_not_letters(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='P', value=3),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+            Tile(letter='C', value=3),
+            Tile(letter='U', value=1),
+            Tile(letter='M', value=3),
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = [
+            Tile(letter='H', value=4),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+        ]
+        
+
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, False)
+        
+    def test_validate_user_has_letters_2(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='H', value=4),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+            Tile(letter='C', value=3),
+            Tile(letter='U', value=1),
+            Tile(letter='M', value=3),
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = "HOLA"
+        
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, True)
+        
+    def test_validate_user_has_not_letters(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='S', value=4),
+            Tile(letter='A', value=1),
+            Tile(letter='C', value=3),
+            
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = [
+            Tile(letter='C', value=3),
+            Tile(letter='A', value=1),
+            Tile(letter='S', value=4),
+            Tile(letter='A', value=1),
+        ]
+        
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, False)
+        
+    def test_validate_user_has_not_word(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='H', value=4),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+            Tile(letter='C', value=3),
+            Tile(letter='U', value=1),
+            Tile(letter='M', value=3),
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = "WAPA"
+        
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, False)
+
+    def test_validate_user_has_letters_3(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='C', value=4),
+            Tile(letter='A', value=1),
+            Tile(letter='S', value=1),
+            Tile(letter='A', value=1),
+            
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = [
+            Tile(letter='C', value=4),
+            Tile(letter='A', value=1),
+            Tile(letter='S', value=1),
+            Tile(letter='A', value=1),
+        ]
+        
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, True)
+        
+    def test_validate_user_has_letters_4(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='C', value=4),
+            Tile(letter='A', value=1),
+            Tile(letter='S', value=1),
+            Tile(letter='A', value=1),
+            
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = "CASA"
+        
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, True)  
+    def test_validate_user_has_letters_in_list(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='P', value=4),
+            Tile(letter='E', value=1),
+            Tile(letter='RR', value=8),
+            Tile(letter='E', value=1),
+            
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = ["P","E","RR","E"]
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, True)
+        
+    def test_validate_user_has_letters_in_list_2(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='P', value=4),
+            Tile(letter='E', value=1),
+            Tile(letter='RR', value=8),
+            Tile(letter='O', value=1),
+            
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = ["P","E","RR","O"]
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, True)
+        
+    def test_validate_user_has_letters_in_list_false(self):
+        bag_tile = BagTiles()
+        bag_tile.tiles = [
+            Tile(letter='P', value=4),
+            Tile(letter='I', value=1),
+            Tile(letter='LL', value=8),
+            Tile(letter='A', value=1),
+            
+        ]
+        player_1 = Player()
+        for i in bag_tile.tiles:
+            player_1.tiles.append(i)
+        tiles = ["P","E","RR","O"]
+        is_valid = player_1.has_letters(tiles)
+        
+        self.assertEqual(is_valid, False)   
+    def test_remove_tile(self):
+        player = Player()
+        player.tiles = [
+            Tile(letter='C', value=4),
+            Tile(letter='A', value=1),
+            Tile(letter='S', value=1),
+            Tile(letter='A', value=1),
+        ]
+        player.remove_tile(Tile("A",1))
+        self.assertEqual(len(player.tiles),3)
+        
+    def test_add_tile(self):
+        player = Player()
+        player.tiles = [
+            Tile(letter='C', value=4),
+            Tile(letter='A', value=1),
+            Tile(letter='S', value=1),
+            Tile(letter='A', value=1),
+        ]
+        player.add_tile(Tile("A",1))
+        self.assertEqual(len(player.tiles),5)
 if __name__ == '__main__':
     unittest.main()

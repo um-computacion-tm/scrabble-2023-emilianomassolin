@@ -1,4 +1,5 @@
 from game.bag_tiles import BagTiles
+from game.tiles import Tile
 class NoLetterException(Exception):
     pass
 class Player:
@@ -43,7 +44,61 @@ class Player:
         return self.name  
     def set_name(self,name):
         self.name=name
-        
-          
+    def has_letters_str(self, tiles_group, match): 
+        tiles_group = tiles_group.upper()
+        for i in self.tiles:
+            if i.letter in match:
+                match[i.letter] += 1
+            else:
+                match[i.letter] = 1 
+        for j in tiles_group:
+            if j in match and match[j] >= 1:
+                match[j] -= 1
+            else:
+                return False
+        return True 
+    def has_letters_list(self, tiles_group, match): 
+        for i in tiles_group:
+            tiles_group = [letter.upper() for letter in tiles_group]
+        for i in self.tiles:
+            if i.letter in match:
+                match[i.letter] += 1
+            else:
+                match[i.letter] = 1 
+        for j in tiles_group:
+            if j in match and match[j] >= 1:
+                match[j] -= 1
+            else:
+                return False
+        return True   
+    def has_letters_tile(self, tiles_group, match):
+        for i in self.tiles:
+            if i.letter in match:
+                match[i.letter] += 1
+            else:
+                match[i.letter] = 1 
+        for j in tiles_group:
+            if j.letter in match and match[j.letter] >= 1:
+                match[j.letter] -= 1
+            else:
+                return False
+            
+        return True
+    def has_letters(self, tiles_group):
+        match = {}    
+        if isinstance(tiles_group, str):    
+            return self.has_letters_str(tiles_group, match)      
+        else:       
+            if all(isinstance(item, str) for item in tiles_group):
+                return self.has_letters_list(tiles_group, match)
+            else:
+                return self.has_letters_tile(tiles_group, match)  
      
-         
+    def remove_tile(self, tile:Tile):
+        for i in self.tiles:
+            if i.letter == tile.letter:
+                self.tiles.remove(i)
+                break           
+            
+    def add_tile(self, tile:Tile):
+        self.tiles.append(tile)     

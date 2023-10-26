@@ -1,3 +1,5 @@
+2023-10-26
+add function:remove and add tiles ,has letter
 2023-10-25
 code climate local and change git ignore , add function: has tile, get tile,activate cell and desactivate cell,change claculate word,change put word 
 2023-10-24
