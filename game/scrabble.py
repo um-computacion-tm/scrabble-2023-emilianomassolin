@@ -176,6 +176,15 @@ class ScrabbleGame:
                 value = calculate_word_value(lists)
                 self.current_player.score += value.calculate_word()
                 
+    def return_old_situation(self, word, location, orientation):
+        row, col = location
+        for i in word: 
+            tile = self.board.grid[row][col].letter 
+            self.current_player.add_tile(tile)
+            self.board.grid[row][col].letter = None
+            self.board.grid[row][col].state = True
+            row, col =self.move_position( orientation, row, col)
+        self.current_player.score = self.player_old_score
     def put_words(self, word, location, orientation):
         valid_word = self.validate_word(word, location, orientation)
         row, col = location

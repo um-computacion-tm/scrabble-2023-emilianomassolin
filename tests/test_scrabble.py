@@ -251,6 +251,29 @@ class TestScrabbleGame(unittest.TestCase):
         self.assertEqual(scoreboard[0][1],40)
         self.assertEqual(scoreboard[1][0],"Apu")
         self.assertEqual(scoreboard[1][1],14)
-   
+    def test_return_old_situation(self):
+        scrabble_game = ScrabbleGame(1)
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.player_old_score = 0
+        scrabble_game.bag_tiles.tiles = [
+            Tile(letter='P', value=3),
+            Tile(letter='A', value=1),
+            Tile(letter='T', value=1),
+            Tile(letter='A', value=1),
+        ]
+        scrabble_game.current_player.tiles.extend(scrabble_game.bag_tiles.take(4))
+        scrabble_game.put_words(word = "Pata",location = (7,7), orientation = "V")
+        scrabble_game.add_score(word = "Pata",location = (7,7), orientation = "V")
+        scrabble_game.return_old_situation(word = "Pata",location = (7,7), orientation = "V")
+        self.assertEqual(len(scrabble_game.current_player.tiles), 4)
+        self.assertEqual(scrabble_game.current_player.score, 0)
+        self.assertEqual(scrabble_game.board.grid[7][7].letter, None)
+        self.assertEqual(scrabble_game.board.grid[8][7].letter, None)
+        self.assertEqual(scrabble_game.board.grid[9][7].letter, None)
+        self.assertEqual(scrabble_game.board.grid[10][7].letter, None)
+        self.assertEqual(scrabble_game.board.grid[7][7].state, True)
+        self.assertEqual(scrabble_game.board.grid[8][7].state, True)
+        self.assertEqual(scrabble_game.board.grid[9][7].state, True)
+        self.assertEqual(scrabble_game.board.grid[10][7].state, True)
 if __name__ == '__main__':
     unittest.main()
