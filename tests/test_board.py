@@ -129,6 +129,18 @@ class TestBoard(unittest.TestCase):
         assert word_is_valid == False  
     
  
+    def test_check_word_left(self):
+        board = Board()
+        board.grid[7][7].add_letter(Tile('C', 1))
+        board.grid[7][8].add_letter(Tile('A', 1)) 
+        board.grid[7][9].add_letter(Tile('S', 1)) 
+        board.grid[7][10].add_letter(Tile('A', 1)) 
+        word = board.check_word_left(row=7, col=11)
+        self.assertEqual(word[0].get_tile().get_letter(),'C')
+        self.assertEqual(word[1].get_tile().get_letter(),'A')
+        self.assertEqual(word[2].get_tile().get_letter(),'S')
+        self.assertEqual(word[3].get_tile().get_letter(),'A')
+        
     
 if __name__ == '__main__':
     unittest.main()

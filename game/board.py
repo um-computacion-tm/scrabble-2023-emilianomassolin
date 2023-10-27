@@ -84,3 +84,16 @@ class Board:
         return False
 
                     
+    def check_center_square(self, row, col):
+        center = self.grid[row][col]
+        return center
+    
+    def check_left_square(self, row, col):
+        return self.grid[row][col-1].has_tile()
+
+    def check_word_left(self, row, col):
+        word = []
+        while col >= 0 and self.check_left_square(row, col):
+            word.insert(0, self.grid[row][col-1])
+            col -= 1
+        return word
