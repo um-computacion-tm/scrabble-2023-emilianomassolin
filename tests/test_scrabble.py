@@ -116,7 +116,130 @@ class TestScrabbleGame(unittest.TestCase):
         self.assertEqual(scrabble_game.board.grid[10][7].letter.letter, "A") 
         self.assertEqual(scrabble_game.current_player.tiles[0].letter,"H")
         self.assertEqual(scrabble_game.current_player.tiles[0].value,3)
+    def test_check_word_to_str(self):
+        scrabble_game = ScrabbleGame(1)
+        scrabble_game.board.grid[7][7].add_letter(Tile('C', 3))
+        scrabble_game.board.grid[7][8].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[7][9].add_letter(Tile('S', 1)) 
+        scrabble_game.board.grid[7][10].add_letter(Tile('A', 1)) 
+        word = scrabble_game.board.check_word_left(row=7, col=11)
+        word_from_list = scrabble_game.check_word_to_str(word)
+        self.assertEqual(word_from_list, "CASA")
+    def test_validate_check_word(self):
+        scrabble_game = ScrabbleGame(1)
+        scrabble_game.board.grid[7][7].add_letter(Tile('C', 3))
+        scrabble_game.board.grid[7][8].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[7][9].add_letter(Tile('S', 1)) 
+        scrabble_game.board.grid[7][10].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[7][11].add_letter(Tile('D', 3)) 
+        scrabble_game.board.grid[7][12].add_letter(Tile('O', 1)) 
+        scrabble_game.board.grid[7][13].add_letter(Tile('S', 1)) 
+        word = scrabble_game.board.check_word_horizontal(row=7, col=11)
+        word_from_list = scrabble_game.check_word_to_str(word)
+        validation = scrabble_game.validate_check_word(word_from_list)
+        self.assertEqual(validation, True)
    
+    def test_get_word_vertical(self):
+        scrabble_game = ScrabbleGame(1)
+        scrabble_game.board.grid[7][7].add_letter(Tile('P', 1))
+        scrabble_game.board.grid[7][8].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[7][9].add_letter(Tile('T', 1)) 
+        scrabble_game.board.grid[7][10].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[7][7].state = False
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.current_player.tiles = [
+            Tile('C', 1),
+            Tile('A', 1),
+            Tile('S', 1),
+            Tile('A', 1),
+            Tile('S', 1),
+        ]
+        word = "casas"
+        location = (3,11)
+        orientation = "V"
+        scrabble_game.put_words(word, location, orientation)
+        scrabble_game.add_score(word, location, orientation)
+        scrabble_game.get_words(word, location, orientation)
+        self.assertEqual(scrabble_game.current_player.score,10)
+        
+    def test_get_word_vertical_no_sum_word_on_board(self):
+        scrabble_game = ScrabbleGame(1)
+        scrabble_game.board.grid[7][7].add_letter(Tile('P', 1))
+        scrabble_game.board.grid[7][8].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[7][9].add_letter(Tile('T', 1)) 
+        scrabble_game.board.grid[7][10].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[7][7].state = False
+        scrabble_game.board.grid[7][8].state = False
+        scrabble_game.board.grid[7][9].state = False
+        scrabble_game.board.grid[7][10].state = False
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.current_player.tiles = [
+            Tile('C', 1),
+            Tile('A', 1),
+            Tile('S', 1),
+            Tile('A', 1),
+        ]
+        word = "casa"
+        location = (6,8)
+        orientation = "V"
+        scrabble_game.put_words(word, location, orientation)
+        scrabble_game.add_score(word, location, orientation)
+        scrabble_game.get_words(word, location, orientation)
+        self.assertEqual(scrabble_game.current_player.score,4)
+        
+    def test_get_word_horizontal(self):
+        scrabble_game = ScrabbleGame(1)
+        scrabble_game.board.grid[7][7].add_letter(Tile('P', 1))
+        scrabble_game.board.grid[8][7].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[9][7].add_letter(Tile('T', 1)) 
+        scrabble_game.board.grid[10][7].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[7][7].state= False
+        scrabble_game.board.grid[8][7].state= False
+        scrabble_game.board.grid[9][7].state= False
+        scrabble_game.board.grid[10][7].state = False
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.current_player.tiles = [
+            Tile('C', 1),
+            Tile('A', 1),
+            Tile('S', 1),
+            Tile('A', 1),
+            Tile('S', 1),
+        ]
+        word = "casas"
+        location = (11,3)
+        orientation = "H"
+        scrabble_game.put_words(word, location, orientation)
+        scrabble_game.add_score(word, location, orientation)
+        scrabble_game.get_words(word, location, orientation)
+        self.assertEqual(scrabble_game.current_player.score,17)
+        
+    def test_get_word_horizontal(self):
+        scrabble_game = ScrabbleGame(1)
+        scrabble_game.board.grid[7][7].add_letter(Tile('P', 1))
+        scrabble_game.board.grid[8][7].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[9][7].add_letter(Tile('T', 1)) 
+        scrabble_game.board.grid[10][7].add_letter(Tile('A', 1)) 
+        scrabble_game.board.grid[12][7].add_letter(Tile('I', 1))
+        scrabble_game.board.grid[13][7].add_letter(Tile('T', 1))  
+        scrabble_game.board.grid[7][7].state= False
+        scrabble_game.board.grid[8][7].state= False
+        scrabble_game.board.grid[9][7].state= False
+        scrabble_game.board.grid[10][7].state = False
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.current_player.tiles = [
+            Tile('C', 1),
+            Tile('A', 1),
+            Tile('S', 1),
+            Tile('A', 1),
+            Tile('S', 1),
+        ]
+        word = "casas"
+        location = (11,3)
+        orientation = "H"
+        scrabble_game.put_words(word, location, orientation)
+        scrabble_game.add_score(word, location, orientation)
+        scrabble_game.get_words(word, location, orientation)
+        self.assertEqual(scrabble_game.get_words(word, location, orientation),False)
     def test_score_board(self):
         scrabble_game = ScrabbleGame(2)
         scrabble_game.players[0].name = "Rogelio"

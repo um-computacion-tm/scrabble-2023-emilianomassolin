@@ -140,7 +140,42 @@ class ScrabbleGame:
         return self.dictionary.has_word(word_from_list)
     
     
-   
+    def get_words(self, word, location, orientation):
+        row, col = location
+        cell_0 = [Cell(None,True,1,None)]
+        cell_list = []
+        list_word = []
+        for i in word:
+            if orientation == "V":
+                if self.board.check_word_horizontal(row, col)!=False:
+                    cell_list.append(self.board.check_word_horizontal(row, col))
+            elif orientation == "H":
+                if self.board.check_word_vertical(row, col)!=False:
+                    cell_list.append(self.board.check_word_vertical(row, col))
+            row, col = self.move_position(orientation, row, col)
+        for lists in cell_list:
+            list_word.append(self.check_word_to_str(lists))
+        for words in list_word:
+            if self.validate_check_word(words)==False:
+                return False
+        self.sum_get_words(cell_list, cell_0)
+        
+                
+    def sum_get_words(self, cell_list, cell_0):
+        for lists in cell_list:
+            for cell in lists:
+                no_sum = False
+                if cell.state:
+                    break
+                else:
+                    no_sum = True
+            if no_sum:
+                value = calculate_word_value(cell_0)
+                self.current_player.score += value.calculate_word()
+            else:
+                value = calculate_word_value(lists)
+                self.current_player.score += value.calculate_word()
+                
     def put_words(self, word, location, orientation):
         valid_word = self.validate_word(word, location, orientation)
         row, col = location
