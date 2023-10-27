@@ -1,4 +1,5 @@
 from game.tiles import Tile
+from game.bag_tiles import BagTiles
 class Cell:
     def __init__(self,letter,state,multiplier, multiplier_type):
         self.multiplier = multiplier
@@ -34,19 +35,18 @@ class Cell:
             return self.letter.value * self.multiplier
         else:
             return self.letter.value
-class calculate_word:
+class calculate_word_value:
     def __init__(self,word) : 
         self.word=word       
     def calculate_word(self):
-        value=0
-        for letras in self.word:
-            value_letra=Cell.calculate_value(letras)
-            value+=value_letra
-        for letras in self.word:
-            if letras.multiplier_type == 'W' and letras.state == True:
-                value = value * letras.multiplier
-        return value    
-    
+        values = 0
+        for cell in self.word:
+            values += cell.calculate_value()
+        for cell in self.word:
+            if cell.multiplier_type == 'W' and cell.state == True:
+                values = values * cell.multiplier
+
+        return values
         
               
         

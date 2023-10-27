@@ -1,5 +1,5 @@
 import unittest
-from game.board import Board,NoCenterLetterException
+from game.board import Board
 from game.tiles import Tile
 from game.cell import Cell
 class TestBoard(unittest.TestCase):
@@ -15,11 +15,13 @@ class TestBoard(unittest.TestCase):
         )
     def test_board_cell_00(self):
         board = Board()
+        board.add_bonus()
         cell = board.grid
         self.assertEqual(cell[0][0].multiplier,3 )
         self.assertEqual(cell[0][0].multiplier_type,'W' )
     def test_board_cell_33(self):
         board=Board()
+        board.add_bonus()
         cell=board.grid
         self.assertEqual(cell[3][3].multiplier,2)
         self.assertEqual(cell[3][3].multiplier_type,'W')
@@ -125,50 +127,8 @@ class TestBoard(unittest.TestCase):
         orientation = "V"
         word_is_valid = board.validate_word_place_board(word, location, orientation)
         assert word_is_valid == False  
-    def test_put_word_Horizontal(self):
-        board=Board()
-        location=(4,4)
-        orientation="H"
-        board.grid[7][7].letter="A"
-        word="CASA"
-        board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[4][4].letter,"C") 
-        self.assertEqual(board.grid[4][5].letter,"A")
-        self.assertEqual(board.grid[4][6].letter,"S")
-        self.assertEqual(board.grid[4][7].letter,"A")
-    def test_put_word_Vertical(self):
-        board=Board()
-        board.grid[7][7].letter="A"
-        location=(4,4)
-        orientation="V"
-        word="CASA"
-        board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[4][4].letter,"C") 
-        self.assertEqual(board.grid[5][4].letter,"A")
-        self.assertEqual(board.grid[6][4].letter,"S")
-        self.assertEqual(board.grid[7][4].letter,"A")    
-    def test_first_put_word_Vertical(self):
-        board=Board()
-        location=(7,7)
-        orientation="V"
-        word="CASA"
-        board.put_word_first(word,location,orientation)
-        self.assertEqual(board.grid[7][7].letter,"C") 
-        self.assertEqual(board.grid[8][7].letter,"A")
-        self.assertEqual(board.grid[9][7].letter,"S")
-        self.assertEqual(board.grid[10][7].letter,"A")  
-    def test_first_put_word_Horizontal(self):
-        board=Board()
-        location=(7,7)
-        orientation="H"
-        word="CASA"
-        board.put_word_first(word,location,orientation)
-        self.assertEqual(board.grid[7][7].letter,"C") 
-        self.assertEqual(board.grid[7][8].letter,"A")
-        self.assertEqual(board.grid[7][9].letter,"S")
-        self.assertEqual(board.grid[7][10].letter,"A")   
+    
  
-
-          
+    
 if __name__ == '__main__':
     unittest.main()

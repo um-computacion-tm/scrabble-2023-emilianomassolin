@@ -1,13 +1,15 @@
-from game.board import Board,NoCenterLetterException
-from game.player import Player,NoLetterException
-from game.bag_tiles import BagTiles
-from game.dictionary import Dictionary,NoDictoniaryException
-from game.tiles import Tile
+from game.board import *
+from game.player import *
+from game.bag_tiles import *
+from game.dictionary import *
+from game.tiles import *
+from game.cell import*
 class end_game(Exception):
     pass
-class end_turn(Exception):
+class EndTurnException(Exception):
     pass
-class invalid_word(Exception):
+
+class InvalidWordException(Exception):
     pass
 class ScrabbleGame:
     def __init__(self, players_count: int):
@@ -15,14 +17,16 @@ class ScrabbleGame:
         self.bag_tiles = BagTiles()
         self.players:list[Player] = []
         self.dictionary = Dictionary('dictionaries/dictionary.txt')
-        self.last_word=[]
-        self.current_player = 0
-        self.game_state=None
+        self.current_player = None
+        self.turn=0
+        self.board.add_bonus()
+        self.votes=[]
         for _ in range(players_count):
             self.players.append(Player())
         
     def next_turn(self):
-        if self.current_player == 0:
+        self.turn+=1
+        if self.current_player == None:
             self.current_player = self.players[0]
         else:
             index = self.players.index(self.current_player) + 1
@@ -32,19 +36,7 @@ class ScrabbleGame:
                 self.current_player = self.players[0]
     def validate_dictionary_word(self, word):
         word = word.lower()
-        return(self.dictionary.has_word(word))
-    def show_board(self): 
-     print('\n  |' + ''.join([f' {str(row_index).rjust(2)} ' for row_index in range(15)]))
-     for row_index, row in enumerate(self.board.grid):
-        print(
-            str(row_index).rjust(2) +
-            '| ' +
-            ' '.join([repr(square) for square in row])
-        )        
-    def check_first_turn(self):
-        self.board.empty()
-        return self.board.is_empty
-    
+        return(self.dictionary.has_word(word))    
     def full_board(self):
         for row in self.board.grid:
             for cell in row:
@@ -54,83 +46,113 @@ class ScrabbleGame:
     
     def end_game(self):
         full_board = self.full_board()
-        if full_board==True:
+        if full_board:
             raise end_game
         elif len(self.bag_tiles.tiles)==0:
                 if len(self.current_player.tiles)==0:
                     raise end_game
-        else:
+        if len(self.votes)==len(self.players):
+            if all(vote == "Y" for vote in self.votes):
+                raise end_game
+            else:
+                self.votes = []
             pass  
     def show_current_player(self):
         print(f"Turno del jugador {self.current_player.name}")
     def fill_current_player_tiles(self):
         self.current_player.tiles.extend(self.bag_tiles.take(7-len(self.current_player.tiles)))  
-    def show_tiles(self):
-        lista=self.current_player.tiles
-        for i in lista:
-            print(i.get_letter(), end=" , ")
-        print(" ")    
-    def show_score(self):
-        print("su puntaje es :",self.current_player.score)  
-    def exchange_index_tile(self):
-        index_exchange = int(input(f"Ingrese indice de ficha a cambiar (0-{len(self.current_player.tiles)-1}): "))
-        tile_exchange = self.current_player.tiles[index_exchange]
-        self.current_player.exchange_tile(tile_exchange ,self.bag_tiles)  
-    def end_current_turn(self):
-        raise end_turn  
+ 
+
+
+    def sort_players_by_score(self):
+        score_board = {}
+        for player in self.players:
+            score_board[player.name] = player.score
+        sorted_score = sorted(score_board.items(), key=lambda item: item[1], reverse=True)
+        return sorted_score
+        
+    def move_position(self, orientation, row, col):
+        if orientation == "H":
+            col += 1
+        elif orientation == "V":
+            row += 1
+        return row, col
     
-    def play_game(self):
-        try:
-            word=input("Coloque la palabra: ").upper()
-            first_row=int(input("coloque la fila: "))
-            first_col=int(input("coloque la columna: "))
-            orientation=input("colocar orientacion H O V: ").upper()
-            location=(first_row,first_col)
-            self.current_player.give_requested_tiles(word)
-            self.dictionary.has_word(word)
-            self.board.put_word(word,location,orientation)
-        except  NoCenterLetterException:
-            print("NOT CENTER")
-        except NoDictoniaryException:
-            print("THE WORD DOES NOT EXIST")    
-        except NoLetterException:
-            print("LETTER NOT FOUND IN PLAYER TILES")
-                
-    def actual_turn(self):
-        self.fill_current_player_tiles()
-        while True:
-            option = int(input(
-                "Indique un número:\n"
-                "0. Colocar palabra\n"
-                "1. Mostrar Tiles\n"
-                "2. Mostrar Tablero\n"
-                "3. Mostrar Puntaje\n"
-                "4. Intercambiar Fichas\n"
-                "5. Terminar turno\n"
-                "6. Salir\n"
-                "= "
-            ))
-            try:
-                if option == 0: 
-                    self.play_game()  
-                elif option == 1:
-                    self.show_tiles()                
-                elif option == 2:
-                    self.show_board()
-                elif option == 3:
-                    self.show_score() 
-                elif option == 4:
-                    tile_changes = int(input("Indique la cantidad de cambios a realizar: "))
-                    for _ in range(tile_changes):
-                        self.exchange_index_tile()
-                        self.show_tiles()
-                    self.end_current_turn() 
-                elif option == 5:
-                    self.end_current_turn()
-                elif option == 6:
-                    raise end_game  
-                else:
-                    pass
-            except end_turn:
-                print("Fin del turno")
-                break    
+    def str_to_list(self, string):
+        consecutive_group = ""
+        word = []
+        for letter in string:
+            if ((consecutive_group == "" or letter == consecutive_group[-1]) 
+                or (letter=="h" and consecutive_group[-1]=="c")):
+                consecutive_group += letter
+            else:
+                word.append(consecutive_group)
+                consecutive_group = letter
+
+        if consecutive_group:
+            word.append(consecutive_group)      
+        return word
+   
+    def validate_word(self, word, location, orientation):
+        valid_place_word = self.board.validate_word_place_board(word, location, orientation)
+        if  valid_place_word:
+            valid_dict = self.dictionary.has_word(word)
+            if valid_dict:
+                valid_has_letters = self.current_player.has_letters(self.board.missing_letters)
+                if valid_has_letters:
+                    return True       
+        return False   
+    
+    def check_wildcard(self):
+        for i in self.current_player.tiles:
+            if i.value == 0:
+                return True
+
+             
+    def deactivate_cells_letters(self, cells):
+        for i in cells:
+            i.deactivate_cell()           
+        
+    def add_score(self, word, location, orientation):
+        valid_word = self.validate_word(word, location, orientation)
+        row = location[0]
+        col = location[1]
+        cells = []
+        if valid_word:
+            for i in word:
+                cells.append(self.board.grid[row][col])
+                row, col = self.move_position(orientation, row, col)
+        value = calculate_word_value(cells)
+        self.player_old_score = self.current_player.score
+        self.current_player.score += value.calculate_word()
+        self.deactivate_cells_letters(cells)   
+  
+    def check_word_to_str(self, cell_list):
+        word_from_list = ""
+        if cell_list is not False:
+            for cell in cell_list:
+                tile = cell.letter
+                word_from_list += tile.get_letter()
+        return word_from_list
+
+    def validate_check_word(self, word_from_list):
+        word_from_list = word_from_list.lower()
+        return self.dictionary.has_word(word_from_list)
+    
+    
+   
+    def put_words(self, word, location, orientation):
+        valid_word = self.validate_word(word, location, orientation)
+        row, col = location
+        if valid_word:
+            if isinstance(word, list): 
+                for i in word:
+                    word = [letter.upper() for letter in word]
+            else:    
+                word = word.upper()
+            for letter in word:
+                matching_tile = next((tile for tile in self.current_player.tiles if tile.letter == letter), None)
+                if matching_tile:
+                    self.board.grid[row][col].add_letter(matching_tile)
+                    self.current_player.remove_tile(matching_tile)
+                row, col = self.move_position(orientation, row, col)              

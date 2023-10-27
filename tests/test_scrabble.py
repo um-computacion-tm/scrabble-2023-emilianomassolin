@@ -37,9 +37,7 @@ class TestScrabbleGame(unittest.TestCase):
        
        game=ScrabbleGame(3)
        self.assertTrue(game.validate_dictionary_word("auto"))
-    def test_check_first_turn(self):
-        game=ScrabbleGame(3)
-        self.assertEqual(game.check_first_turn(),True)
+
     def test_end_game(self):
         scrabble_game = ScrabbleGame(players_count=2)
         scrabble_game.bag_tiles.tiles = []
@@ -77,10 +75,59 @@ class TestScrabbleGame(unittest.TestCase):
         self.assertEqual(scrabble_game.current_player.tiles[0].letter, "H")
         self.assertEqual(scrabble_game.current_player.tiles[0].value, 3)  
     
-   
-   
-   
-   
+    def test_put_word_horizontal(self):
+        scrabble_game = ScrabbleGame(players_count=2)
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.bag_tiles.tiles = [
+            Tile(letter='H', value=3),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+        ]
+        scrabble_game.current_player.tiles.extend(scrabble_game.bag_tiles.take(4))
+        word = "Hola"
+        orientation = "H"
+        location = (7,7)
+        scrabble_game.put_words(word,location,orientation)
+        self.assertEqual(scrabble_game.board.grid[7][7].letter.letter, "H") 
+        self.assertEqual(scrabble_game.board.grid[7][8].letter.letter, "O") 
+        self.assertEqual(scrabble_game.board.grid[7][9].letter.letter, "L") 
+        self.assertEqual(scrabble_game.board.grid[7][10].letter.letter, "A")  
+        self.assertEqual(scrabble_game.current_player.tiles,[])
     
+    def test_put_word_vertical(self):
+        scrabble_game = ScrabbleGame(players_count=2)
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.bag_tiles.tiles = [
+            Tile(letter='H', value=3),
+            Tile(letter='O', value=1),
+            Tile(letter='L', value=1),
+            Tile(letter='A', value=1),
+            Tile(letter='H', value=3),
+        ]
+        scrabble_game.current_player.tiles.extend(scrabble_game.bag_tiles.take(5))
+        word = "Hola"
+        orientation = "V"
+        location = (7,7)
+        scrabble_game.put_words(word,location,orientation)
+        self.assertEqual(scrabble_game.board.grid[7][7].letter.letter, "H") 
+        self.assertEqual(scrabble_game.board.grid[8][7].letter.letter, "O") 
+        self.assertEqual(scrabble_game.board.grid[9][7].letter.letter, "L") 
+        self.assertEqual(scrabble_game.board.grid[10][7].letter.letter, "A") 
+        self.assertEqual(scrabble_game.current_player.tiles[0].letter,"H")
+        self.assertEqual(scrabble_game.current_player.tiles[0].value,3)
+   
+    def test_score_board(self):
+        scrabble_game = ScrabbleGame(2)
+        scrabble_game.players[0].name = "Rogelio"
+        scrabble_game.players[0].score = 40
+        scrabble_game.players[1].name = "Apu"
+        scrabble_game.players[1].score = 14
+        scoreboard = scrabble_game.sort_players_by_score()
+        self.assertEqual(scoreboard[0][0],"Rogelio")
+        self.assertEqual(scoreboard[0][1],40)
+        self.assertEqual(scoreboard[1][0],"Apu")
+        self.assertEqual(scoreboard[1][1],14)
+   
 if __name__ == '__main__':
     unittest.main()

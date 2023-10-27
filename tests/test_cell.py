@@ -1,5 +1,5 @@
 import unittest
-from game.cell import Cell
+from game.cell import *
 from game.tiles import Tile
 
 

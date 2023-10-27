@@ -4,15 +4,13 @@ class NoLetterException(Exception):
     pass
 class Player:
     def __init__(self):
-        self.name=""
+        self.name=None
         self.score=0
         self.tiles = []
-    def increse_score(self,amount):
-        self.amount=amount
-        self.score+=amount
+
     def take_tiles_from_the_bagtiles(self,bag:BagTiles,amount):
         self.tiles.extend(bag.take(amount)) 
-    def exchange_tile(self, tile, bag:BagTiles):
+    def exchange_tile(self, bag:BagTiles,tile):
         for i in range(len(self.tiles)):
             if self.tiles[i] == tile:
                 popped = self.tiles.pop(i)

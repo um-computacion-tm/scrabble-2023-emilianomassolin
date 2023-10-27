@@ -19,10 +19,6 @@ class TestPlayer(unittest.TestCase):
         player=Player()
         tiles=player.get_tiles()
         self.assertEqual(tiles,[])    
-    def test_increase_score(self):
-        player_1=Player()
-        player_1.increse_score(2)
-        self.assertEqual(player_1.score,2)
     def test_take_tiles_from_the_bag(self):
         Player1=Player()
         bag=BagTiles()
@@ -33,7 +29,7 @@ class TestPlayer(unittest.TestCase):
         bag = BagTiles()
         player.take_tiles_from_the_bagtiles(bag, 2)
         tile = player.tiles[0]
-        player.exchange_tile(player.tiles[0], bag)
+        player.exchange_tile(bag,player.tiles[0])
         self.assertFalse(tile == player.tiles[0])    
     def test_find_letter_in_tiles(self):
         player = Player()

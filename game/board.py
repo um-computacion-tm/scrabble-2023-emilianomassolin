@@ -1,15 +1,16 @@
 from game.cell import  Cell
-class NoCenterLetterException(Exception):
-    pass
+from game.tiles import Tile
+from game.bag_tiles import BagTiles
+
 class Board:
     def __init__(self):        
         self.grid = [
-            [ Cell(None,None,1, '') for _ in range(15) ]for _ in range(15)]
-        self.add_bonus()
+            [ Cell(None,True,1, '') for _ in range(15) ]for _ in range(15)]
+        self.is_empty=None
     #diagonales triple palabra, doble palabra, triple letra, doble letra,
     def add_bonus(self):
-        TRIPLE_WORD_SCORE = ((0,0), (7, 0), (14,0), (0, 7), (14, 7), (0, 14), (7, 14), (14,14))
-        DOUBLE_WORD_SCORE = ((1,1), (2,2), (3,3), (4,4), (1, 13), (2, 12), (3, 11), (4, 10), (13, 1), (12, 2), (11, 3), (10, 4), (13,13), (12, 12), (11,11), (10,10))
+        TRIPLE_WORD_SCORE = ((0,0), (7, 0), (14,0), (0, 7), (14, 7), (0, 14),(7, 14), (14,14))
+        DOUBLE_WORD_SCORE = ((1,1),(2,2),(3,3),(4,4),(10,10),(11,11),(12,12),(13,13),(1,13),(2,12),(3,11), (4,10),(7,7),(13,1),(12,2),(11,3),(10,4))
         TRIPLE_LETTER_SCORE = ((1,5), (1, 9), (5,1), (5,5), (5,9), (5,13), (9,1), (9,5), (9,9), (9,13), (13, 5), (13,9))
         DOUBLE_LETTER_SCORE = ((0, 3), (0,11), (2,6), (2,8), (3,0), (3,7), (3,14), (6,2), (6,6), (6,8), (6,12), (7,3), (7,11), (8,2), (8,6), (8,8), (8, 12), (11,0), (11,7), (11,14), (12,6), (12,8), (14, 3), (14, 11))
         for i in TRIPLE_WORD_SCORE:
@@ -81,27 +82,5 @@ class Board:
             else:
                 return self.validate_word_place_board_is_not_empty(orientation)
         return False
-    def put_word(self,word,location:tuple,orientation):
-        self.empty()
-        valid=self.validate_word_place_board(word,location,orientation)
-        if self.is_empty==False and valid==True:            
-         for i , j in zip(word,range(len(word))):
-             if orientation == "H":
-                 self.grid[location[0]][location[1]+j].letter= i
-                 
-             if orientation== "V":
-                 self.grid[location[0]+j][location[1]].letter=i 
-                 
-    def put_word_first(self,word,location:tuple,orientation):
-        self.empty()
-        valid=self.validate_word_place_board(word,location,orientation)
-        if self.is_empty==True: #primer palabra
-            center_position = (7,7)
-            if center_position == location and valid==True:
-                for i , j in zip(word,range(len(word))):
-                 if orientation == "H":
-                  self.grid[location[0]][location[1]+j].letter= i  
-               
-                 if orientation== "V":
-                    self.grid[location[0]+j][location[1]].letter=i 
+
                     
