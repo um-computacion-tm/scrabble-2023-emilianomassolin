@@ -91,9 +91,70 @@ class Board:
     def check_left_square(self, row, col):
         return self.grid[row][col-1].has_tile()
 
+    def check_right_square(self, row, col):
+        return self.grid[row][col+1].has_tile()
+
+    def check_up_square(self, row, col):
+        return self.grid[row-1][col].has_tile()
+
+    def check_down_square(self, row, col):
+        return self.grid[row+1][col].has_tile()
+    
+    def check_word_horizontal(self, row, col):
+        left = self.check_word_left(row, col)
+        right = self.check_word_right(row, col)
+        center = self.check_center_square(row, col)
+        left.append(center)
+        left.extend(right)
+        if len(left) < 2:
+            return False
+        return left
+
+    def check_word_vertical(self, row, col):
+        up = self.check_word_up(row, col)
+        down = self.check_word_down(row, col)
+        center = self.check_center_square(row, col)
+        up.append(center)
+        up.extend(down)
+        if len(up) < 2:
+            return False
+        return up
+    
     def check_word_left(self, row, col):
         word = []
         while col >= 0 and self.check_left_square(row, col):
             word.insert(0, self.grid[row][col-1])
             col -= 1
         return word
+
+    def check_word_right(self, row, col):
+        word = []
+        while col >= 0 and self.check_right_square(row, col):
+            word.append(self.grid[row][col+1])
+            col += 1
+        return word
+
+    def check_word_up(self, row, col):
+        word = []
+        while row >= 0 and self.check_up_square(row, col):
+            word.insert(0, self.grid[row-1][col])
+            row -= 1
+        return word
+
+    def check_word_down(self, row, col):
+        word = []
+        while row >= 0 and self.check_down_square(row, col):
+            word.append(self.grid[row+1][col])
+            row += 1
+        return word
+    def print_board(self):
+        print('  ', end='')  
+        for col_num in range(15):
+            print(f'{col_num:5}', end=' ')
+        print()  
+
+        for row_num, row in enumerate(self.grid):
+            print(f'{row_num:2} ', end='')   
+            for cell in row:
+                print(cell, end=' ')
+            print()    
