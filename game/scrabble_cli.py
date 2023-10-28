@@ -41,8 +41,16 @@ class ScrabbleCli:
         tile_exchange = self.game.current_player.tiles[index_exchange]
         self.game.current_player.exchange_tile(self.game.bag_tiles ,tile_exchange)
         
-
+    def choose_wildcard(self):
+        wildcard = self.game.check_wildcard()
+        if wildcard:
+            for i in self.game.current_player.tiles:
+                if i.value == 0:
+                    letter_for_wild = str(input("Enter letter for wildcard:"))
+                    letter_for_wild = letter_for_wild.upper()
+                    i.set_letter(letter_for_wild)
+            
+    
     def end_current_turn(self):
         raise EndTurnException        
     
-   

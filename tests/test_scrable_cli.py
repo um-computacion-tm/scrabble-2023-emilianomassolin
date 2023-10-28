@@ -80,6 +80,16 @@ class TestCli(unittest.TestCase):
         ]
         scrabble_cli.exchange_index_tile()
         
+    @patch('builtins.input', return_value="H")
+    def test_choose_wildcard(self, input_patched):
+        scrabble_cli = ScrabbleCli(1)
+        scrabble_cli.game.current_player = scrabble_cli.game.players[0]
+        scrabble_cli.game.current_player.tiles = [
+            Tile(" ",0),
+        ]
+        scrabble_cli.choose_wildcard()
+        self.assertEqual(scrabble_cli.game.current_player.tiles[0].letter, "H")
+        
    
     def test_end_current_turn(self):
         scrabble_cli = ScrabbleCli(2)
@@ -87,7 +97,6 @@ class TestCli(unittest.TestCase):
         with self.assertRaises(EndTurnException):
             scrabble_cli.end_current_turn()
         
-  
     
             
     
