@@ -8,7 +8,7 @@ Scrabble is a word game in which two to four players score points by placing til
 
 3. Clone the repository using: -git clone https://github.com/um-computacion-tm/scrabble-2023-emilianomassolin.git
 
-4. Navigate to the repository directory: cd /.../scrabble-2023-scrabble-2023-emilianomassolin
+4. Navigate to the repository directory: cd /.../scrabble-2023-emilianomassolin
 
 5. Build the Docker image: -docker build -t image_name .-  (In image name give it the name you want)
 
