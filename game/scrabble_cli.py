@@ -50,11 +50,21 @@ class ScrabbleCli:
                     letter_for_wild = letter_for_wild.upper()
                     i.set_letter(letter_for_wild)
             
+    def get_row(self):
+        while True:
+            try:
+                row = int(input("Enter row(0-14): "))
+                if row < 0 or row >= 15:
+                    raise ValueError
+                return row
+            except ValueError:
+                print("Invalid number of row")
+
    
     def end_current_turn(self):
         raise EndTurnException        
     
-
+  
     def show_results(self):
         print("The Game has ended")
         leaderboard = self.game.sort_players_by_score()

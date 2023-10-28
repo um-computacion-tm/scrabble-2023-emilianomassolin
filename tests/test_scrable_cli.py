@@ -90,14 +90,20 @@ class TestCli(unittest.TestCase):
         scrabble_cli.choose_wildcard()
         self.assertEqual(scrabble_cli.game.current_player.tiles[0].letter, "H")
         
-
+    @patch('builtins.print')
+    @patch('builtins.input', side_effect=['A', "16", '3'])
+    def test_get_row(self, input_patched, print_patched):
+        scrabble_cli = ScrabbleCli(1)
+        scrabble_cli.get_row()
+        
+   
     def test_end_current_turn(self):
         scrabble_cli = ScrabbleCli(2)
 
         with self.assertRaises(EndTurnException):
             scrabble_cli.end_current_turn()
         
-
+   
     def test_show_results(self):
         
         scrabble_cli = ScrabbleCli(2)
