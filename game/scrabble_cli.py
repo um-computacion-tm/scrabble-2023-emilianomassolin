@@ -1,9 +1,4 @@
-import os
 from game.scrabble import *
-
-
-def clean_terminal():
-    os.system('clear')
 
 def players_to_play():
     while True:
@@ -15,9 +10,6 @@ def players_to_play():
         except ValueError:
             print("Invalid number")
             
-
-
-
 class ScrabbleCli:
     def __init__(self, players):
         self.game = ScrabbleGame(players)

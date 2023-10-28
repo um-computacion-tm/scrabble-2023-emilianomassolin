@@ -3,15 +3,7 @@ from game.scrabble_cli import *
 from unittest.mock import patch
 from io import StringIO
 
-class TestCli(unittest.TestCase):
-    
-
-        
-    @patch('os.system') 
-    def test_clean_terminal_calls_os_system_clear(self, mock_os_system):
-        clean_terminal()  
-        mock_os_system.assert_called_once_with('clear')
-    
+class TestCli(unittest.TestCase): 
     @patch('builtins.input', return_value='3')
     def test_get_player_count(self, input_patched):
         self.assertEqual(

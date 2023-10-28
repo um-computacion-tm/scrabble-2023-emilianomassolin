@@ -12,7 +12,7 @@ def main():
             scrabble_game.game.end_game()
             scrabble_game.show_current_player()  
             scrabble_game.game_turn()
-            clean_terminal()
+            
 
         except end_game:
             scrabble_game.show_results()
