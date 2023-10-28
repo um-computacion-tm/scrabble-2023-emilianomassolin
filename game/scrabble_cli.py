@@ -60,7 +60,29 @@ class ScrabbleCli:
             except ValueError:
                 print("Invalid number of row")
 
-   
+    def get_col(self):
+        while True:
+            try:
+                col = int(input("Enter col(0-14): "))
+                if col < 0 or col >= 14:
+                    raise ValueError
+                return col
+            except ValueError:
+                print("Invalid number of col")
+            
+    def get_orientation(self):
+        while True:
+            try:
+                orientation = str(input("Enter orientation(H/V): "))
+                orientation = orientation.upper()
+                if orientation == "H" or orientation == "V":
+                    return orientation
+                raise ValueError
+            except ValueError:
+                print("Invalid orientation")
+                
+
+    #        
     def end_current_turn(self):
         raise EndTurnException        
     

@@ -1,5 +1,5 @@
 2023-10-28
-add function choose_wildcard,add show_results,add get row
+add function choose_wildcard,add show_results,add get row,add get_col,add get col and get orientation
 2023-10-27
 modification has _letter ,change remove tile,change function to scrabble cli and modification change has word diccionary ana add test , change calculate word, add end current turn,create check word left,right,up,down,vertical,horizontal change show_board,create function get word , sum get_word and return old_situation 
 2023-10-26

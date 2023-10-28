@@ -96,13 +96,29 @@ class TestCli(unittest.TestCase):
         scrabble_cli = ScrabbleCli(1)
         scrabble_cli.get_row()
         
-   
+    @patch('builtins.print')
+    @patch('builtins.input', side_effect=['F', "-3", '7'])
+    def test_get_col(self, input_patched, print_patched):
+        scrabble_cli = ScrabbleCli(1)
+        scrabble_cli.get_col()
+        
+    @patch('builtins.print')
+    @patch('builtins.input', side_effect=['F', "3", 'H'])
+    def test_get_orientation_horizontal(self, input_patched, print_patched):
+        scrabble_cli = ScrabbleCli(1)
+        scrabble_cli.get_orientation()
+        
+    @patch('builtins.print')
+    @patch('builtins.input', side_effect=['1', "Vertical", 'V'])
+    def test_get_orientation_vertical(self, input_patched, print_patched):
+        scrabble_cli = ScrabbleCli(1)
+        scrabble_cli.get_orientation()
+        
     def test_end_current_turn(self):
         scrabble_cli = ScrabbleCli(2)
 
         with self.assertRaises(EndTurnException):
             scrabble_cli.end_current_turn()
-        
    
     def test_show_results(self):
         
