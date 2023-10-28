@@ -50,7 +50,13 @@ class ScrabbleCli:
                     letter_for_wild = letter_for_wild.upper()
                     i.set_letter(letter_for_wild)
             
-    
+   
     def end_current_turn(self):
         raise EndTurnException        
     
+
+    def show_results(self):
+        print("The Game has ended")
+        leaderboard = self.game.sort_players_by_score()
+        print(leaderboard)
+        print(f"The winner is: {leaderboard[0][0]}")

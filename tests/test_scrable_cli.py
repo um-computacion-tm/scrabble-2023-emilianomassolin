@@ -90,13 +90,26 @@ class TestCli(unittest.TestCase):
         scrabble_cli.choose_wildcard()
         self.assertEqual(scrabble_cli.game.current_player.tiles[0].letter, "H")
         
-   
+
     def test_end_current_turn(self):
         scrabble_cli = ScrabbleCli(2)
 
         with self.assertRaises(EndTurnException):
             scrabble_cli.end_current_turn()
         
+
+    def test_show_results(self):
+        
+        scrabble_cli = ScrabbleCli(2)
+        scrabble_cli.game.players[0].name = "E"
+        scrabble_cli.game.players[0].score = 100
+        scrabble_cli.game.players[1].name = "Tomas"
+        scrabble_cli.game.players[1].score = 200
+        
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            scrabble_cli.show_results()
+            expected_output = "The Game has ended\n[('Tomas', 200), ('E', 100)]\nThe winner is: Tomas\n"
+            self.assertEqual(mock_stdout.getvalue(), expected_output)
     
             
     
