@@ -119,7 +119,68 @@ class TestCli(unittest.TestCase):
 
         with self.assertRaises(EndTurnException):
             scrabble_cli.end_current_turn()
-   
+        
+    @patch('builtins.input', return_value="Y")
+    def test_vote_to_end_game(self, input_patched):
+        scrabble_cli = ScrabbleCli(1)
+        scrabble_cli.vote_to_end_game()
+        self.assertEqual(scrabble_cli.game.votes, ["Y"])
+       
+      
+    @patch('builtins.input', side_effect=["perro", "7", "7", "H", "go back"])
+    @patch('builtins.print')
+    def test_enter_word_valid_input_and_go_back(self, mock_input, mock_print):
+        
+        scrabble_cli = ScrabbleCli(2)  
+        
+        scrabble_cli.game.current_player = scrabble_cli.game.players[0]
+        scrabble_cli.game.current_player.tiles = [
+            Tile("A",1),
+            Tile("H",1),
+            Tile("O",1),
+            Tile("L",1),
+        ]
+        
+        scrabble_cli.enter_word()  
+           
+    @patch('builtins.print')
+    @patch('builtins.input', side_effect=["0", "hola", "7", "7", "V"])
+    def test_turn_put_word(self, mock_input, mock_print):
+        
+        scrabble_cli = ScrabbleCli(2)
+        scrabble_cli.game.current_player = scrabble_cli.game.players[0]
+        scrabble_cli.game.current_player.tiles = [
+            Tile("A",1),
+            Tile("H",1),
+            Tile("O",1),
+            Tile("L",1),
+        ]
+        scrabble_cli.game_turn()
+        
+    @patch('builtins.print')
+    @patch('builtins.input', side_effect=["2","1","2"])
+    def test_turn_exchange_tiles(self, mock_input, mock_print):
+        
+        scrabble_cli = ScrabbleCli(2)
+        scrabble_cli.game.current_player = scrabble_cli.game.players[0]
+        scrabble_cli.game.current_player.tiles = [
+            Tile("A",1),
+            Tile("H",1),
+            Tile("O",1),
+            Tile("L",1),
+        ]
+        scrabble_cli.game_turn()
+        
+    @patch('builtins.print')
+    @patch('builtins.input', side_effect=["9","Y"])
+    def test_turn_cote_to_end(self, mock_input, mock_print):
+        
+        scrabble_cli = ScrabbleCli(2)
+        scrabble_cli.game.current_player = scrabble_cli.game.players[0]
+        scrabble_cli.game_turn()
+               
+               
+    
     def test_show_results(self):
         
         scrabble_cli = ScrabbleCli(2)

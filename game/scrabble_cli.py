@@ -81,12 +81,83 @@ class ScrabbleCli:
             except ValueError:
                 print("Invalid orientation")
                 
-
-    #        
+    def enter_word(self):
+        while True:    
+            try:
+                word = str(input("Enter word or type -go back- to return: "))
+                if word == "go back":
+                    break
+                word = self.game.str_to_list(word)
+                row = self.get_row()
+                col = self.get_col()
+                orientation = self.get_orientation()
+                location = (row, col)
+                self.game.put_words(word, location, orientation)
+                self.game.add_score(word, location, orientation)
+                if self.game.validate_word(word, location, orientation) is False:
+                    raise InvalidWordException
+                self.game.get_words(word, location, orientation)
+                if self.game.get_words(word, location, orientation) is False:
+                    self.game.return_old_situation(word, location, orientation)
+                    raise InvalidWordException
+                self.end_current_turn()
+            except InvalidWordException:
+                print("Invalid word")
+            
     def end_current_turn(self):
         raise EndTurnException        
     
-  
+    def vote_to_end_game(self):
+        vote = str(input("Are you sure you want to finish the game?(y/n): "))
+        vote=vote.upper()
+        self.game.votes.extend(vote)
+               
+    def game_turn(self):
+       self.game.fill_current_player_tiles()
+       while True:
+           print("\n")
+           print("Tiles:")
+           self.show_tiles() 
+           print("Score:")
+           self.show_score()
+           self.game.board.print_board()
+           option = input(
+               "\n"
+               "Enter a number:\n"
+               "0. Put Word\n"
+               "1. Exchange Tiles\n"
+               "2. End turn\n"
+               "9. End game\n"
+               "= "
+           
+           )
+           
+           try:
+               if option == "0":   
+                   self.choose_wildcard()
+                   self.enter_word() 
+                   
+                            
+               elif option == "1":
+                   tile_changes = int(input("Hoy many tiles are you changing: "))
+                   for _ in range(tile_changes):
+                       self.exchange_index_tile()
+                       self.show_tiles()
+                   self.end_current_turn() 
+               elif option == "2":
+                   self.end_current_turn()
+               elif option == "9":
+                   self.vote_to_end_game()
+                   self.end_current_turn()
+               else:
+                   pass
+           except EndTurnException:
+               print(
+                   "End Turn"
+                   "\n"
+                   )
+               break
+           
     def show_results(self):
         print("The Game has ended")
         leaderboard = self.game.sort_players_by_score()
