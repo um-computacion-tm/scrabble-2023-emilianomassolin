@@ -1,0 +1,6 @@
+.coverage
+__pycache__/
+*/__pycache__/*x
+*.py[cod]
+env/
+.keep
