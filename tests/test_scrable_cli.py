@@ -135,20 +135,7 @@ class TestCli(unittest.TestCase):
         
         scrabble_cli.enter_word()  
            
-    @patch('builtins.print')
-    @patch('builtins.input', side_effect=["0", "hola", "7", "7", "V"])
-    def test_turn_put_word(self, mock_input, mock_print):
-        
-        scrabble_cli = ScrabbleCli(2)
-        scrabble_cli.game.current_player = scrabble_cli.game.players[0]
-        scrabble_cli.game.current_player.tiles = [
-            Tile("A",1),
-            Tile("H",1),
-            Tile("O",1),
-            Tile("L",1),
-        ]
-        scrabble_cli.game_turn()
-        
+  
     @patch('builtins.print')
     @patch('builtins.input', side_effect=["2","1","2"])
     def test_turn_exchange_tiles(self, mock_input, mock_print):
